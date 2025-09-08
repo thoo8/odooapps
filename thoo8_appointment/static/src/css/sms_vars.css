@@ -1,0 +1,10 @@
+.sms-var {
+    cursor: pointer;
+    background: #f4f4f4;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: 0 2px;
+}
+.sms-var:hover {
+    background: #d9edf7;
+}

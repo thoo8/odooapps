@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="portal_appointment_template" name="Appointment Booking Portal">
+            <t t-call="website.layout">
+
+                <!-- Loading Screen -->
+                <div id="page-preloader">
+                    <div class="loader-wrapper">
+                        <i class="fa fa-spinner fa-spin fa-5x text-primary"></i>
+                    </div>
+                </div>
+
+                <div id="appointment-container" class="container my-5">
+                    <h2 class="mb-4">Booking Appointment</h2>
+
+                    <!-- In case of error message -->
+                    <t t-if="error_message">
+                        <div class="text-center">
+                            <img t-att-src="'/thoo8_appointment/static/src/img/no_appointments.png'"
+                                 alt="No Appointments"
+                                 style="max-width: 400px; width: 100%;"/>
+                            <div class="alert alert-danger text-center mb-4">
+                                <t t-esc="error_message"/>
+                            </div>
+                        </div>
+                    </t>
+
+                    <!-- In case there is no error -->
+                    <t t-if="not error_message">
+                        <div id="form-errors" class="text-danger" style="margin-bottom: 10px;"></div>
+                        <form id="appointment-request-form" t-att-action="'/thoo8/appointment/submit'" method="post"
+                              class="form">
+
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="schedule_id"/>
+
+                            <!-- ================== STEP 1 ================== -->
+                            <div id="step-1" class="wizard-step">
+                                <div class="form-group mb-3">
+                                    <label for="service_type">Service Type</label>
+                                    <select name="service_type" id="service_type" class="form-control" required="required"
+                                            t-att-value="service_type or ''">
+                                        <option value="">Select Service Type</option>
+                                        <t t-foreach="service_types" t-as="stype">
+                                            <option t-att-value="stype.id">
+                                                <t t-esc="stype.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                    <div class="text-danger error-service-type"></div>
+                                    <div id="service-note-display" class="alert alert-info mt-2" style="display:none;"></div>
+                                </div>
+
+                                <!-- Gender Selection -->
+                                <div id="gender-selection" style="display:none;" class="form-group mb-3">
+                                    <label for="gender">Select Department</label>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="">Select Department</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                    <div class="text-danger error-gender"></div>
+                                </div>
+
+                                <!-- Date and Time Table -->
+                                <div id="appointment-scheduler" style="display:none;" class="row">
+                                    <div class="col-md-7">
+                                        <!-- Calendar Date Selection -->
+                                        <div id="appointment-calendar" style="display:none;" class="form-group mb-3">
+                                            <h5 id="appointment-date-title">Select Date</h5>
+                                            <div id="calendar-header" class="d-flex justify-content-between align-items-center mb-2">
+                                                <button type="button" id="prev-month" class="btn btn-light btn-sm"
+                                                        style="font-size: 1.6rem;padding: 1px 10px;"
+                                                        disabled="disabled">&#171;</button>
+                                                <h5 id="calendar-title" class="m-0"></h5>
+                                                <button type="button" id="next-month" class="btn btn-light btn-sm"
+                                                        style="font-size: 1.6rem;padding: 1px 10px;" >&#187;</button>
+                                            </div>
+                                            <div id="calendar-grid" class="table-responsive">
+                                                <table class="table table-bordered text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sun</th>
+                                                            <th>Mon</th>
+                                                            <th>Tue</th>
+                                                            <th>Wed</th>
+                                                            <th>Thu</th>
+                                                            <th>Fri</th>
+                                                            <th>Sat</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="calendar-body"></tbody>
+                                                </table>
+                                            </div>
+                                            <input type="hidden" name="appointment_date"/>
+                                            <div class="text-danger error-appointment_date"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 bg-light">
+                                        <div id="appointment_time-selection" style="display:none;" class="form-group mb-3">
+                                            <h5 id="appointment-time-title">Available Times</h5>
+                                            <input type="hidden" name="appointment_time"/>
+                                            <div id="available-times" class="d-flex flex-wrap gap-2 text-center"></div>
+                                            <div class="text-danger error-appointment_time"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary mt-3" id="next-to-step-2">Next</button>
+                            </div>
+
+                            <!-- ================== STEP 2 ================== -->
+                            <div id="step-2" class="wizard-step" style="display:none;">
+                                <div class="form-group mb-3">
+                                    <label for="beneficiary_name">Beneficiary Name</label>
+                                    <input type="text" name="beneficiary_name" class="form-control" required="required"/>
+                                    <div class="text-danger error-beneficiary-name"></div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="id_card">ID Card</label>
+                                    <input type="text" name="id_card" class="form-control" required="required"
+                                           t-att-value="id_card or ''"/>
+                                    <div class="text-danger error-id-card"></div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="mobile">Mobile No</label>
+                                    <input type="text" name="mobile" class="form-control" required="required"
+                                           t-att-value="mobile or ''"/>
+                                    <div class="text-danger error-mobile"></div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="mobile_other">Other Mobile No</label>
+                                    <input type="text" name="mobile_other" class="form-control"
+                                           t-att-value="mobile_other or ''"/>
+                                    <div class="text-danger error-mobile_other"></div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="otp">Code (OTP)</label>
+                                    <input type="text" name="otp" class="form-control" required="required"
+                                           t-att-value="otp or ''"/>
+                                    <div class="text-success success-opt-sent"></div>
+                                    <div class="text-danger error-otp-code"></div>
+                                    <button type="button" id="send-otp" class="btn btn-secondary mt-2">Send OTP</button>
+                                </div>
+
+                                <button type="button" class="btn btn-secondary" id="back-to-step-1">Back</button>
+                                <button type="button" class="btn btn-primary" id="next-to-step-3">Next</button>
+                            </div>
+
+                            <!-- ================== STEP 3 ================== -->
+                            <div id="step-3" class="wizard-step" style="display:none;">
+                                <h4 class="mb-3">Confirm Data</h4>
+                                <div id="confirmation-summary" class="mb-3"></div>
+
+                                <div class="alert alert-warning text-center o_form_header warning-idcard-duplicate" role="alert"
+                                     id="warning-idcard-duplicate" style="display:none;"></div>
+
+                                <button type="button" class="btn btn-secondary" id="back-to-step-2">Back</button>
+                                <button type="submit" class="btn btn-success" id="submit_appointment">Confirm Booking</button>
+                            </div>
+
+                        </form>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

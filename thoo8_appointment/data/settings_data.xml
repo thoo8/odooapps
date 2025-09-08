@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="1">
+        <record id="default_appointment_settings_sms" model="thoo8.appointment.settings_sms">
+            <field name="name"> إعدادات الرسائل النصية</field>
+            <field name="enable_create_sms">True</field>
+            <field name="create_sms_template">تم استلام طلب الموعد بنجاح.\nرقم الطلب: {order_number}</field>
+            <field name="enable_confirm_sms">False</field>
+            <field name="confirm_sms_template">تم تأكيد موعدكم.\nرقم الطلب: {order_number}\nبتاريخ: {date}\nالساعة: {time}</field>
+            <field name="enable_portal_confirm_sms">True</field>
+            <field name="confirm_portal_sms_template">تم تأكيد موعدكم.\nرقم الطلب: {order_number}\nبتاريخ: {date}\nالساعة: {time}</field>
+            <field name="enable_cancel_sms">False</field>
+            <field name="cancel_sms_template">تم إلغاء طلب موعدكم.\nلرقم الطلب: {order_number}</field>
+        </record>
+    </data>
+</odoo>

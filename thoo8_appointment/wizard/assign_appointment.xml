@@ -1,0 +1,31 @@
+<odoo>
+    <!-- ========================= -->
+    <!-- Form View for Wizard -->
+    <!-- ========================= -->
+    <record id="view_appointment_assign_wizard_form" model="ir.ui.view">
+        <field name="name">thoo8.appointment.assign.wizard.form</field>
+        <field name="model">thoo8.appointment.assign.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Appointment">
+                <group>
+                    <field name="appointment_id" invisible="1"/>
+                    <field name="user_id"/>
+                </group>
+                <footer>
+                    <button string="Assign" type="object" name="action_assign" class="btn btn-primary"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- Action for Wizard -->
+    <!-- ========================= -->
+    <record id="action_appointment_request_assign_wizard" model="ir.actions.act_window">
+        <field name="name">Assign Appointment</field>
+        <field name="res_model">thoo8.appointment.assign.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

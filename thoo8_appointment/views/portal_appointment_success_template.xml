@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="portal_appointment_success_template" name="Appointment Success">
+            <t t-call="website.layout">
+                <div class="container my-5">
+                    <h2 class="text-success">
+                        Your appointment request has been successfully received!
+                    </h2>
+
+                    <t t-if="not appointment.slot_id">
+                        <p>
+                            We will schedule your appointment and notify you via SMS or call once the slots are available.
+                        </p>
+                    </t>
+
+                    <p>
+                        Request Number:
+                        <strong t-esc="appointment.name"/>
+                    </p>
+
+                    <p>
+                        ID Card Number:
+                        <strong t-esc="appointment.id_card"/>
+                    </p>
+
+                    <p>
+                        Beneficiary Name:
+                        <strong t-esc="appointment.beneficiary_name"/>
+                    </p>
+
+                    <p>
+                        Registered Mobile Number:
+                        <strong t-esc="appointment.mobile"/>
+                    </p>
+
+                    <p>
+                        Purpose of Appointment:
+                        <strong t-esc="appointment.service_type_id.name"/>
+                    </p>
+
+                    <t t-if="appointment.slot_id">
+                        <p>
+                            Appointment Date:
+                            <strong t-esc="appointment.slot_id.date_only"/>
+                        </p>
+                        <p>
+                            Time:
+                            <strong t-esc="appointment.slot_id.time_only"/>
+                        </p>
+                    </t>
+
+                    <p>
+                        Thank you for contacting us.
+                    </p>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

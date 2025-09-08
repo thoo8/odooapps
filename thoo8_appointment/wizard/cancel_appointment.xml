@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_cancel_appointment_wizard_form" model="ir.ui.view">
+        <field name="name">cancel.appointment.wizard.form</field>
+        <field name="model">cancel.appointment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Appointment">
+                <sheet>
+                    <div class="text-center" attrs="{'invisible': [('selected_date', '=', '')]}">
+                        <strong style="color:green; font-size:22px;" >
+                            <field name="formatted_datetime_ar" readonly="1"/>
+                        </strong>
+                    </div>
+                    <group>
+                        <group string="Cancellation Details" colspan="2" style="margin-top: 15px;">
+                            <field name="enable_cancel_sms" invisible="1"/>
+                            <field name="selected_date" invisible="1"/>
+                            <field name="slot_id" invisible="1"/>
+                            <field name="cancel_reason" widget="selection" options="{'no_create': True}"
+                                   string="Cancellation Reason" placeholder="Select reason"/>
+                            <field name="cancel_note" widget="text" placeholder="Write your notes here..."
+                                   string="Additional Notes" style="height:100px;"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="cancel_with_sms" type="object" string="Confirm with SMS"
+                                class="btn btn-danger"
+                                attrs="{'invisible': [('enable_cancel_sms', '=', False)]}"/>
+                        <button name="cancel_without_sms" type="object" string="Confirm without SMS"
+                                class="btn btn-success"/>
+                        <button string="Cancel" class="btn btn-link" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_cancel_appointment_wizard" model="ir.actions.act_window">
+        <field name="name">Cancel Appointment</field>
+        <field name="res_model">cancel.appointment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_appointment_form" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.form</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Booking">
+                    <header>
+                        <button id="button_cancelled" name="action_cancelled" type="object" states="draft,confirmed"
+                                string="Cancel Appointment" class="btn-danger" icon="fa-lock"
+                                groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                        <button id="button_confirmed" name="action_confirmed" type="object" states="draft"
+                                string="Confirm Appointment" class="btn-primary" icon="fa-thumbs-up"
+                                groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                        <button id="button_completed" name="action_completed" type="object" states="confirmed"
+                                string="Completed Appointment" class="btn-success" icon="fa-check-square-o"
+                                groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                        <button id="button_draft" name="action_draft" type="object" states="cancelled,confirmed,completed"
+                                string="Set As Draft" class="btn-secondary" icon="fa-archive"
+                                groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                        <button id="button_open_assign_wizard" name="action_open_assign_wizard" type="object"
+                                string="Assign To" class="btn-primary" icon="fa-user"
+                                groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access,thoo8_appointment.group_thoo8_appointment_assign"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,completed"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger"
+                                attrs="{'invisible': [('state', '!=', 'cancelled')]}"/>
+                        <widget name="web_ribbon" title="Completed" bg_color="bg-success"
+                                attrs="{'invisible': [('state', '!=', 'completed')]}"/>
+
+                        <div class="alert alert-danger text-center o_form_header" role="alert"
+                            attrs="{'invisible': [('state', '!=', 'cancelled')]}">
+                            <div>
+                                <strong>
+                                    Reason for cancellation:
+                                </strong>
+                                <label for="cancel_reason" string=""/>
+                                <field name="cancel_reason" required="0" readonly="1"/>
+                                <label for="cancel_note" string=""/>
+                                <field name="cancel_note" required="0" readonly="1"/>
+                            </div>
+                        </div>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="beneficiary_name"/>
+                            <field name="id_card"/>
+                            <field name="mobile"/>
+                            <field name="mobile_other"/>
+                            <field name="use_schedule" widget="boolean_toggle"
+                                   groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                            <field name="service_type_id"/>
+                            <field name="department"/>
+                            <field name="appointment_date" attrs="{'invisible': [('use_schedule', '=', True)]}"
+                                   groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+                            <field name="slot_id"
+                                   attrs="{'invisible': ['|', ('use_schedule', '=', False), ('slot_message','!=',False)],
+                                           'readonly': [('slot_message','!=',False)]}"/>
+                            <field name="slot_message" readonly="1" nolabel="0" class="text-danger" string=" "
+                                   attrs="{'invisible': ['|', ('use_schedule', '=', False), ('slot_message','=',False)]}"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="appointment_end" invisible="1"/>
+                            <field name="formatted_datetime_ar"/>
+                            <field name="service_note" readonly="1" attrs="{'invisible': [('service_note', '=', False)]}" placeholder="No Note For This Appointment"/>
+                        </group>
+                    </sheet>
+                    <!-- Chatter-->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                          <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_appointment_search" model="ir.ui.view">
+            <field name="name">appointment.search</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="id_card"/>
+                    <field name="beneficiary_name"/>
+                    <field name="name"/>
+                    <field name="mobile"/>
+                    <separator/>
+                    <filter name="filter_state" string="State Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <filter name="filter_state" string="State Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="filter_state" string="State Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <filter name="filter_state" string="State Completed" domain="[('state', '=', 'completed')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Department" name="grp_department" context="{'group_by':'department'}"/>
+                        <filter string="Assign To" name="grp_user" context="{'group_by':'user_id'}"/>
+                        <filter string="State" name="grp_state" context="{'group_by':'state'}"/>
+                        <filter string="Date" name="grp_date" context="{'group_by':'appointment_date'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="state" icon="fa-list" select="1" enabule_counters="1" />
+                        <field name="department" enabule_counters="1" select="1"/>
+                        <field name="service_type_id" icon="fa-bars" select="" enabule_counters="1" />
+                        <field name="user_id" icon="fa-user" select="1" enabule_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_appointment_tree" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.tree</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <tree string="Appointments">
+                    <field name="name"/>
+                    <field name="beneficiary_name"/>
+                    <field name="id_card"/>
+                    <field name="mobile"/>
+                    <field name="department"/>
+                    <field name="user_id" widget="many2one_avatar" options="{'no_open': True}"/>
+                    <field name="appointment_date"/>
+                    <field name="service_type_id"/>
+                    <field name="state" decoration-muted="state == 'draft'"
+                                        decoration-info="state == 'confirmed'"
+                                        decoration-danger="state == 'cancelled'"
+                                        decoration-success="state == 'completed'" widget="badge" />
+                    <field name="create_date" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Appointment Type Tree-->
+        <record id="view_service_type_tree" model="ir.ui.view">
+            <field name="name">thoo8.service.type.tree</field>
+            <field name="model">thoo8.service.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="active" invisible="1"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Appointment Type Form-->
+        <record id="view_service_type_form" model="ir.ui.view">
+            <field name="name">thoo8.service.type.form</field>
+            <field name="model">thoo8.service.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <h1>
+                                <label for="name" string="Name"/>
+                                <field name="name" nolabel="1" colspan="2"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="service_gender"/>
+                            <field name="note" widget="html"/>
+                        </group>
+                        <group string="Appointment Restriction Settings">
+                            <!-- تقييد مواعيد الرجال -->
+                            <group attrs="{'invisible': [('service_gender', '=', 'female')]}">
+                                <div class="o_row">
+                                    <field name="enable_male_schedule" widget="boolean_toggle"
+                                           attrs="{'invisible': [('service_gender', '=', 'female')]}"/>
+                                    <label for="enable_male_schedule"/>
+                                </div>
+                            </group>
+                            <!-- تقييد مواعيد النساء -->
+                            <group attrs="{'invisible': [('service_gender', '=', 'male')]}">
+                                <div class="o_row">
+                                    <field name="enable_female_schedule" widget="boolean_toggle"
+                                           attrs="{'invisible': [('service_gender', '=', 'male')]}"/>
+                                    <label for="enable_female_schedule"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="schedule_male_id"
+                                       attrs="{'invisible': [('enable_male_schedule','=',False)],'required': [('enable_male_schedule','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="schedule_female_id"
+                                       attrs="{'invisible': [('enable_female_schedule','=',False)],'required': [('enable_female_schedule','=',True)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <!-- Chatter-->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Appointment Cancel Reason Tree-->
+        <record id="view_appointment_cancel_reason_tree" model="ir.ui.view">
+            <field name="name">thoo8.appointment.cancel_reason.tree</field>
+            <field name="model">thoo8.appointment.cancel_reason</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="active" invisible="1"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Appointment Cancel Reason Form-->
+        <record id="view_appointment_cancel_reason_form" model="ir.ui.view">
+            <field name="name">thoo8.appointment.cancel_reason.form</field>
+            <field name="model">thoo8.appointment.cancel_reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <!-- Chatter-->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_service_type_search" model="ir.ui.view">
+            <field name="name">service_type.search</field>
+            <field name="model">thoo8.service.type</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <separator/>
+                    <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="filter_active" string="DeActive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_thoo8_root" name="Appointments"
+                  web_icon="thoo8_appointment,static/description/icon.png"/>
+        <menuitem id="menu_thoo8_appointments" name="Bookings" parent="menu_thoo8_root"/>
+        <menuitem id="menu_thoo8_settings" name="Settings" parent="menu_thoo8_root"/>
+
+        <!-- كافة مواعيد -->
+        <record id="action_thoo8_appointments" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- مواعيد القسم النسائي -->
+        <record id="action_thoo8_appointments_female" model="ir.actions.act_window">
+            <field name="name">Female Department Appointment</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('department','=','female')]</field>
+        </record>
+
+        <!-- مواعيد قسم الرجال -->
+        <record id="action_thoo8_appointments_male" model="ir.actions.act_window">
+            <field name="name">Male Department Appointment</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('department','=','male')]</field>
+        </record>
+
+        <!-- مواعيد اليوم -->
+        <record id="action_thoo8_appointments_today" model="ir.actions.act_window">
+            <field name="name">Today's Appointments</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">
+                [
+                    ('appointment_date','&gt;=', context_today()),
+                    ('appointment_date','&lt;', (context_today() + relativedelta(days=1)))
+                ]
+            </field>
+        </record>
+
+        <!-- مواعيد غير مجدولة -->
+        <record id="action_thoo8_appointments_unscheduled" model="ir.actions.act_window">
+            <field name="name">Unscheduled Appointments</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('appointment_date','=',False)]</field>
+        </record>
+
+
+        <!-- الخدمات الخاصة بالماعيد -->
+        <record id="action_thoo8_services" model="ir.actions.act_window">
+            <field name="name">Service Types</field>
+            <field name="res_model">thoo8.service.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_thoo8_appointment_cancel_reason" model="ir.actions.act_window">
+            <field name="name">Cancel Reason</field>
+            <field name="res_model">thoo8.appointment.cancel_reason</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_thoo8_appointment_action"
+                  name="All Appointments"
+                  parent="menu_thoo8_appointments"
+                  action="action_thoo8_appointments"
+                  groups="thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointments_female"
+                  name="Appointments For Female"
+                  parent="menu_thoo8_appointments"
+                  action="action_thoo8_appointments_female"
+                  groups="thoo8_appointment.group_thoo8_appointment_female,thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointments_male"
+                  name="Appointments For Male"
+                  parent="menu_thoo8_appointments"
+                  action="action_thoo8_appointments_male"
+                  groups="thoo8_appointment.group_thoo8_appointment_male,thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointments_today"
+                  name="Today's Appointments"
+                  parent="menu_thoo8_appointments"
+                  action="action_thoo8_appointments_today"
+                  groups="thoo8_appointment.group_thoo8_appointment_male,thoo8_appointment.group_thoo8_appointment_female,thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointments_unscheduled"
+                  name="Unscheduled Appointments"
+                  parent="menu_thoo8_appointments"
+                  action="action_thoo8_appointments_unscheduled"
+                  groups="thoo8_appointment.group_thoo8_appointment_male,thoo8_appointment.group_thoo8_appointment_female,thoo8_appointment.group_thoo8_appointment_manage,thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointment_service_action"
+                  name="Manage Services"
+                  parent="menu_thoo8_settings"
+                  action="action_thoo8_services"
+                  groups="thoo8_appointment.group_thoo8_appointment_full_access"/>
+        <menuitem id="menu_thoo8_appointment_cancel_reason_action"
+                  name="Manage Cancel Reason"
+                  parent="menu_thoo8_settings"
+                  action="action_thoo8_appointment_cancel_reason"
+                  groups="thoo8_appointment.group_thoo8_appointment_full_access"/>
+    </data>
+</odoo>

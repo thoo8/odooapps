@@ -1,0 +1,25 @@
+<odoo>
+    <!-- قاعدة عرض مواعيد الرجال -->
+    <record id="rule_appointment_male" model="ir.rule">
+        <field name="name">Appointments - Male Only</field>
+        <field name="model_id" ref="thoo8_appointment.model_thoo8_appointment_request"/>
+        <field name="groups" eval="[(4, ref('thoo8_appointment.group_thoo8_appointment_male'))]"/>
+        <field name="domain_force">[('department','=','male')]</field>
+    </record>
+
+    <!-- قاعدة عرض مواعيد النساء -->
+    <record id="rule_appointment_female" model="ir.rule">
+        <field name="name">Appointments - Female Only</field>
+        <field name="model_id" ref="thoo8_appointment.model_thoo8_appointment_request"/>
+        <field name="groups" eval="[(4, ref('thoo8_appointment.group_thoo8_appointment_female'))]"/>
+        <field name="domain_force">[('department','=','female')]</field>
+    </record>
+
+    <!-- تحكم كامل (يشوف الكل) -->
+    <record id="rule_appointment_full_access" model="ir.rule">
+        <field name="name">Appointments - Full Access</field>
+        <field name="model_id" ref="thoo8_appointment.model_thoo8_appointment_request"/>
+        <field name="groups" eval="[(4, ref('thoo8_appointment.group_thoo8_appointment_full_access'))]"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+</odoo>
