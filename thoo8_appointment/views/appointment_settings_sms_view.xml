@@ -1,0 +1,116 @@
+<odoo>
+    <data>
+        <!-- Settings Form -->
+        <record id="view_thoo8_appointment_settings_sms_form" model="ir.ui.view">
+            <field name="name">thoo8.appointment.settings_sms.form</field>
+            <field name="model">thoo8.appointment.settings_sms</field>
+            <field name="arch" type="xml">
+                <form string="Appointment SMS Settings" create="false" edit="true">
+                    <sheet>
+                        <group>
+                            <group col="1">
+                                <!-- Appointment Creation -->
+                                <div class="">
+                                    <field name="enable_create_sms" widget="boolean_toggle"/>
+                                    <label for="enable_create_sms"/>
+                                </div>
+                                <div class="mx-5" attrs="{'invisible': [('enable_create_sms','=',False)],'required': [('enable_create_sms','=',True)]}">
+                                    <field name="create_sms_template"/>
+                                    <div class="o_sms_vars mt-1" data-target="create_sms_template">
+                                        Variables:
+                                        <span class="sms-var" data-var="{order_number}">{order_number}</span>
+                                        <span class="sms-var" data-var="{name}">{name}</span>
+                                        <span class="sms-var" data-var="{id_card}">{id_card}</span>
+                                        <span class="sms-var" data-var="{mobile}">{mobile}</span>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <!-- Portal Confirmation -->
+                                <div class="">
+                                    <field name="enable_portal_confirm_sms" widget="boolean_toggle"/>
+                                    <label for="enable_portal_confirm_sms"/>
+                                </div>
+                                <div class="mx-5" attrs="{'invisible': [('enable_portal_confirm_sms','=',False)],'required': [('enable_portal_confirm_sms','=',True)]}">
+                                    <field name="confirm_portal_sms_template"/>
+                                    <div class="o_sms_vars mt-1" data-target="confirm_portal_sms_template">
+                                        Variables:
+                                        <span class="sms-var" data-var="{order_number}">{order_number}</span>
+                                        <span class="sms-var" data-var="{name}">{name}</span>
+                                        <span class="sms-var" data-var="{id_card}">{id_card}</span>
+                                        <span class="sms-var" data-var="{mobile}">{mobile}</span>
+                                        <span class="sms-var" data-var="{date}">{date}</span>
+                                        <span class="sms-var" data-var="{time}">{time}</span>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <!-- Internal Confirmation -->
+                                <div class="">
+                                    <field name="enable_confirm_sms" widget="boolean_toggle"/>
+                                    <label for="enable_confirm_sms"/>
+                                </div>
+                                <div class="mx-5" attrs="{'invisible': [('enable_confirm_sms','=',False)],'required': [('enable_confirm_sms','=',True)]}">
+                                    <field name="confirm_sms_template"/>
+                                    <div class="o_sms_vars mt-1" data-target="confirm_sms_template">
+                                        Variables:
+                                        <span class="sms-var" data-var="{order_number}">{order_number}</span>
+                                        <span class="sms-var" data-var="{name}">{name}</span>
+                                        <span class="sms-var" data-var="{id_card}">{id_card}</span>
+                                        <span class="sms-var" data-var="{mobile}">{mobile}</span>
+                                        <span class="sms-var" data-var="{date}">{date}</span>
+                                        <span class="sms-var" data-var="{time}">{time}</span>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <!-- Cancellation -->
+                                <div class="">
+                                    <field name="enable_cancel_sms" widget="boolean_toggle"/>
+                                    <label for="enable_cancel_sms"/>
+                                </div>
+                                <div class="mx-5" attrs="{'invisible': [('enable_cancel_sms','=',False)],'required': [('enable_cancel_sms','=',True)]}">
+                                    <field name="cancel_sms_template"/>
+                                    <div class="o_sms_vars mt-1" data-target="cancel_sms_template">
+                                        Variables:
+                                        <span class="sms-var" data-var="{order_number}">{order_number}</span>
+                                        <span class="sms-var" data-var="{name}">{name}</span>
+                                        <span class="sms-var" data-var="{id_card}">{id_card}</span>
+                                        <span class="sms-var" data-var="{mobile}">{mobile}</span>
+                                        <span class="sms-var" data-var="{cancel_reason}">{cancel_reason}</span>
+                                    </div>
+                                </div>
+
+                            </group>
+                        </group>
+
+                        <footer>
+                            <button name="reset_defaults"
+                                    string="Restore Default Settings"
+                                    type="object"
+                                    class="btn-secondary"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Open Settings Action -->
+        <record id="action_thoo8_sms_settings" model="ir.actions.act_window">
+            <field name="name">SMS Settings</field>
+            <field name="res_model">thoo8.appointment.settings_sms</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_thoo8_appointment_settings_sms_form"/>
+            <field name="target">current</field>
+            <field name="res_id" ref="default_appointment_settings_sms"/>
+        </record>
+
+        <!-- Module Menu -->
+        <menuitem id="menu_thoo8_appointment_settings_sms"
+                  name="Manage SMS"
+                  parent="menu_thoo8_settings"
+                  action="action_thoo8_sms_settings"
+                  groups="thoo8_appointment.group_thoo8_appointment_full_access"
+                  sequence="20"/>
+    </data>
+</odoo>

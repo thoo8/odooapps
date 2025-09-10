@@ -1,0 +1,123 @@
+#page-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1; /* أو أي لون خلفية تبيه */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-preloader .loader-wrapper {
+    text-align: center;
+}
+
+/* تنسيق عام للتقويم */
+#appointment-calendar table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* اليوم الحالي */
+#appointment-calendar .today-day {
+    border: 2px solid #ffc107; /* إطار أصفر */
+    font-weight: bold;
+    position: relative;
+}
+
+/* لو اليوم الحالي متاح */
+#appointment-calendar .today-day.selectable-day {
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.6); /* توهج أصفر */
+}
+
+/* لو اليوم الحالي مختار */
+#appointment-calendar .today-day.selected-day {
+    background-color: #007bff !important; /* أزرق */
+    border: 2px solid #0056b3; /* إطار أزرق غامق */
+}
+
+#appointment-calendar th {
+    background: #f8f9fa;
+    font-weight: 600;
+    padding: 8px;
+    font-size: smaller;
+}
+
+#appointment-calendar td {
+    padding: 12px;
+    vertical-align: middle;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* الأيام المتاحة */
+#appointment-calendar .selectable-day {
+    background-color: #f5fffa !important;
+    color: #348911 !important;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+#appointment-calendar .selectable-day:hover {
+    background-color: #afe586 !important;
+    color:#f7f7f7;
+    cursor: pointer;
+}
+
+/* اليوم المحدد */
+#appointment-calendar .selected-day {
+    background-color: #35979c !important;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: none !important;
+}
+
+/* الأيام غير المتاحة */
+#appointment-calendar td.text-muted {
+    color: #ccc !important;
+    background-color: transparent !important;
+}
+
+/* تنسيق رأس الشهر */
+#calendar-header {
+    margin-bottom: 10px;
+    border: 1px solid #F1F1F1;
+}
+#calendar-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* زر السابق / التالي */
+#calendar-header button {
+    width: 32px;
+    height: 32px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0;
+}
+
+/* الأوقات المتاحة */
+#available-times {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+    gap: 10px;
+}
+
+#available-times button {
+    width: auto; /* حجم الزر حسب النص */
+    min-width: 80px; /* تعطيه حد أدنى عشان ما يكون صغير */
+    text-align: center;
+    font-size:1.1rem
+}
+
+#appointment-date-title,
+#appointment-time-title{
+    margin: 20px 0px;
+}
+

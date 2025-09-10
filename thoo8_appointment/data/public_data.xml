@@ -1,0 +1,30 @@
+<odoo>
+    <record id="weekday_0" model="thoo8.weekday">
+        <field name="name">الأحد</field>
+        <field name="code">6</field>
+    </record>
+    <record id="weekday_1" model="thoo8.weekday">
+        <field name="name">الاثنين</field>
+        <field name="code">0</field>
+    </record>
+    <record id="weekday_2" model="thoo8.weekday">
+        <field name="name">الثلاثاء</field>
+        <field name="code">1</field>
+    </record>
+    <record id="weekday_3" model="thoo8.weekday">
+        <field name="name">الأربعاء</field>
+        <field name="code">2</field>
+    </record>
+    <record id="weekday_4" model="thoo8.weekday">
+        <field name="name">الخميس</field>
+        <field name="code">3</field>
+    </record>
+    <record id="weekday_5" model="thoo8.weekday">
+        <field name="name">الجمعة</field>
+        <field name="code">4</field>
+    </record>
+    <record id="weekday_6" model="thoo8.weekday">
+        <field name="name">السبت</field>
+        <field name="code">5</field>
+    </record>
+</odoo>

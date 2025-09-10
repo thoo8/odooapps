@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- تصنيف الصلاحيات ضمن قائمة منسدلة في شاشة المستخدم -->
+    <record id="module_category_thoo8_appointment" model="ir.module.category">
+        <field name="name">Appointment system powers</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- المجموعات -->
+    <record id="group_thoo8_appointment_full_access" model="res.groups">
+        <field name="name">Full Access</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <record id="group_thoo8_appointment_manage" model="res.groups">
+        <field name="name">Manage Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <record id="group_thoo8_appointment_edit" model="res.groups">
+        <field name="name">Edit Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <record id="group_thoo8_appointment_view_only" model="res.groups">
+        <field name="name">Only Seen Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <!-- قسم الرجال -->
+    <record id="group_thoo8_appointment_male" model="res.groups">
+        <field name="name">Male Department Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <!-- قسم النساء -->
+    <record id="group_thoo8_appointment_female" model="res.groups">
+        <field name="name">Female Department Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+    <!-- Assign Appointment -->
+    <record id="group_thoo8_appointment_assign" model="res.groups">
+        <field name="name">Assign Appointment</field>
+        <field name="category_id" ref="thoo8_appointment.module_category_thoo8_appointment"/>
+    </record>
+
+</odoo>

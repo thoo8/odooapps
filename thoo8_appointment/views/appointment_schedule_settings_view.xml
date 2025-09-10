@@ -1,0 +1,127 @@
+<odoo>
+    <record id="view_appointment_schedule_settings_form" model="ir.ui.view">
+        <field name="name">thoo8.appointment.schedule.settings.form</field>
+        <field name="model">thoo8.appointment.schedule.settings</field>
+        <field name="arch" type="xml">
+            <form string="Appointment Scheduling">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="appointment_duration"/>
+                            <field name="excluded_weekdays" widget="many2many_tags"
+                                   options="{'no_open': True, 'no_create_edit': True, 'no_quick_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="start_date" options="{'datepicker': {'min_date': 'context_today'}}" required="1"/>
+                            <field name="end_date" required="1" attrs="{'invisible': [('start_date', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="holiday_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <footer>
+                        <button string="Generate Schedule" type="object" name="generate_schedule" class="btn btn-primary"/>
+                    </footer>
+
+                    <notebook>
+                        <page string="Scheduled Appointments">
+                            <field name="slot_ids" context="{'default_settings_id': active_id}">
+                                <tree editable="bottom" string="Appointments">
+                                    <field name="slot_datetime" invisible="1"/>
+                                    <field name="date_only"/>
+                                    <field name="time_only"/>
+                                    <field name="is_booked"/>
+                                    <field name="settings_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_appointment_schedule_settings_kanban" model="ir.ui.view">
+        <field name="name">thoo8.appointment.schedule.settings.kanban</field>
+        <field name="model">thoo8.appointment.schedule.settings</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div><strong><field name="name"/></strong></div>
+                            <div>Appointment Duration: <field name="appointment_duration"/> minutes</div>
+                            <div>Start Time: <field name="start_time"/></div>
+                            <div>End Time: <field name="end_time"/></div>
+                            <div>From: <field name="start_date"/></div>
+                            <div>To: <field name="end_date"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_appointment_schedule_settings_tree" model="ir.ui.view">
+        <field name="name">thoo8.appointment.schedule.settings.tree</field>
+        <field name="model">thoo8.appointment.schedule.settings</field>
+        <field name="arch" type="xml">
+            <tree string="Appointment Scheduling">
+                <field name="name"/>
+                <field name="appointment_duration"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Appointment Slots Tree View -->
+    <record id="view_appointment_slot_tree" model="ir.ui.view">
+        <field name="name">thoo8.appointment.slot.tree</field>
+        <field name="model">thoo8.appointment.slot</field>
+        <field name="arch" type="xml">
+            <tree string="Appointments">
+                <field name="slot_datetime"/>
+                <field name="is_booked"/>
+                <field name="settings_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Scheduling Settings -->
+    <record id="action_thoo8_appointment_schedule_settings" model="ir.actions.act_window">
+        <field name="name">Appointment Scheduling</field>
+        <field name="res_model">thoo8.appointment.schedule.settings</field>
+        <field name="view_id" ref="view_appointment_schedule_settings_tree"/>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Click "Create" to add a new scheduling setup.</p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_thoo8_appointment_schedule_settings"
+            name="Appointment Schedule"
+            parent="menu_thoo8_settings"
+            action="action_thoo8_appointment_schedule_settings"
+            groups="thoo8_appointment.group_thoo8_appointment_full_access"
+            sequence="10"/>
+</odoo>

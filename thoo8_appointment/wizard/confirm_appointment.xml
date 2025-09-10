@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_confirm_appointment_wizard_form" model="ir.ui.view">
+        <field name="name">confirm.appointment.wizard.form</field>
+        <field name="model">confirm.appointment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Appointment">
+                <field name="show_date_warning" invisible="1"/>
+                <field name="appointment_date" invisible="1"/>
+                <field name="enable_confirm_sms" invisible="1"/>
+                <group>
+                    <field name="user_id"/>
+                </group>
+                <div class="text-center" style="text-align:center;">
+                    <!-- Warning Message -->
+                    <div class="alert alert-warning" role="alert" style="font-size:18px;"
+                         attrs="{'invisible': [('show_date_warning', '=', False)]}">
+                        ⚠️ The date you selected is:<br/>
+                        <strong>
+                            <field name="formatted_datetime_ar" readonly="1" widget="char" style="color:red; font-size:22px; text-align:center;" class="oe_inline"/>
+                        </strong>
+                        <br/>
+                        It is before today's date. Are you sure you want to confirm this appointment?
+                    </div>
+
+                    <!-- Regular Message -->
+                    <div attrs="{'invisible': [('show_date_warning', '=', True)]}" style="font-size:18px;">
+                        The scheduled appointment is:<br/>
+                        <strong>
+                            <field name="formatted_datetime_ar" readonly="1" widget="char" style="color:green; font-size:22px; text-align:center;" class="oe_inline"/>
+                        </strong>
+                        <br/>
+                        Do you want to confirm it?
+                    </div>
+                </div>
+
+                <footer>
+                    <button name="confirm_with_sms" type="object" string="Confirm with SMS"
+                            class="btn btn-danger" attrs="{'invisible': [('enable_confirm_sms', '=', False)]}"/>
+                    <button name="confirm_without_sms" type="object" string="Confirm without SMS"
+                            class="btn btn-success"/>
+                    <button string="Cancel" class="btn btn-link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_confirm_appointment_wizard" model="ir.actions.act_window">
+        <field name="name">Confirm Appointment</field>
+        <field name="res_model">confirm.appointment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

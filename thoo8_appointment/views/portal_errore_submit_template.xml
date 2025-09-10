@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="portal_errore_submit_template" name="Appointment Success">
+            <t t-call="website.layout">
+                <div class="container my-5">
+                    <h2 class="text-danger">Sorry..!!</h2>
+                    <div class="alert alert-danger text-center o_form_header warning-idcard-duplicate" role="alert"
+                         id="warning-idcard-duplicate" style="display:none;">
+                        <h4 class="alert-heading">Sorry.!</h4>
+                        <hr/>
+                        <t t-if="error_message">
+                            <div class="alert alert-danger">
+                                <t t-esc="error_message"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

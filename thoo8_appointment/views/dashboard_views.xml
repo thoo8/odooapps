@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ========================= -->
+        <!-- Kanban View -->
+        <!-- ========================= -->
+        <record id="view_appointment_request_dashboard_kanban" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.kanban</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column" create="false" edit="false">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="beneficiary_name"/>
+                    <field name="id_card"/>
+                    <field name="mobile"/>
+                    <field name="department"/>
+                    <field name="appointment_date"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record border rounded p-2 shadow-sm bg-white">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="fw-bold text-primary">
+                                        <a t-att-href="'/web#id=' + (record.id.raw_value || '') + '&amp;model=thoo8.appointment.request&amp;view_type=form'"
+                                           target="_blank"
+                                           class="text-decoration-none text-primary">
+                                            <t t-esc="record.name.value"/>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <span t-if="record.state.raw_value === 'draft'" class="badge bg-secondary">Draft</span>
+                                        <span t-if="record.state.raw_value === 'confirmed'" class="badge bg-info">Confirmed</span>
+                                        <span t-if="record.state.raw_value === 'completed'" class="badge bg-success">Completed</span>
+                                        <span t-if="record.state.raw_value === 'cancelled'" class="badge bg-danger">Cancelled</span>
+                                    </div>
+                                </div>
+                                <div class="row g-1 text-muted">
+                                    <div class="col-12">
+                                        <div>
+                                            <i class="fa fa-user me-1"/>
+                                            <t t-esc="record.beneficiary_name.value or '-'"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <i class="fa fa-id-card me-1"/>
+                                            <t t-esc="record.id_card.value or '-'"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <i class="fa fa-phone me-1"/>
+                                            <t t-esc="record.mobile.value or '-'"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <i class="fa fa-calendar me-1"/>
+                                            <t t-if="record.appointment_date.raw_value">
+                                                <span t-esc="moment(record.appointment_date.raw_value).locale('en').format('YYYY-MM-DD')"
+                                                      class="text-info fw-bold"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <i class="fa fa-clock-o me-1"/>
+                                            <t t-if="record.appointment_date.raw_value">
+                                                <span t-esc="moment(record.appointment_date.raw_value).locale('en').format('HH:mm')"
+                                                      class="text-info fw-bold"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="o_kanban_partner_avatar">
+                                        <field name="user_id" widget="many2one_avatar_user"/>
+                                        <a type="object"
+                                           class="btn btn-link btn-sm p-0"
+                                           name="action_open_assign_wizard"
+                                           groups="thoo8_appointment.group_thoo8_appointment_manage,
+                                                   thoo8_appointment.group_thoo8_appointment_full_access,
+                                                   thoo8_appointment.group_thoo8_appointment_assign">
+                                            <i class="fa fa-user-plus me-1"/>
+                                            Assign To
+                                        </a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="text-muted mx-2" t-esc="record.department.value or '-'"/>
+                                        <!-- أيقونات حسب القسم -->
+                                        <t t-if="record.department.raw_value === 'male'">
+                                            <i class="fa fa-male text-primary me-1" title="Male Department"></i>
+                                        </t>
+                                        <t t-if="record.department.raw_value === 'female'">
+                                            <i class="fa fa-female text-danger me-1" title="Female Department"></i>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Graph View -->
+        <!-- ========================= -->
+        <record id="view_appointment_request_dashboard_graph" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.graph</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <graph string="Appointments By Day" type="bar">
+                    <field name="appointment_date" type="row"/>
+                    <field name="id" type="measure" string="Number of appointments" operator="count"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Gantt View -->
+        <!-- ========================= -->
+        <record id="view_appointment_request_dashboard_gantt" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.gantt</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <gantt string="Appointment scheduling"
+                       date_start="appointment_date"
+                       date_stop="appointment_end"
+                       default_group_by="user_id"
+                       color="department"
+                       default_scale="day"
+                       create="false">
+                    <field name="name"/>
+                    <field name="beneficiary_name"/>
+                    <field name="user_id"/>
+                    <field name="department"/>
+                    <field name="state"/>
+                </gantt>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Activity View -->
+        <!-- ========================= -->
+        <record id="view_appointment_request_dashboard_activity" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.activity</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <activity string="Appointments Activities">
+                    <templates>
+                        <div t-name="activity-box">
+                            <div>
+                                <field name="name" display="full" />
+                                <field name="beneficiary_name"/>
+                                <field name="user_id" muted="1" display="full" on_change="1" can_create="true" can_write="true"/>
+                                <field name="state"/>
+                            </div>
+                        </div>
+                    </templates>
+                </activity>
+            </field>
+        </record>
+
+        <!-- =============================== -->
+         <!-- Calendar View for Appointments -->
+        <!-- =============================== -->
+        <record id="view_appointment_request_dashboard_calendar" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.calendar</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <calendar string="Appointment calendar"
+                          date_start="appointment_date"
+                          color="state"
+                          mode="month"
+                          quick_add="false"
+                          event_limit="5"
+                          event_open_popup="true">
+
+                    <!-- العنوان الأساسي -->
+                    <field name="name"/>
+                    <field name="state" invisible="1" filters="1"/>
+
+                    <!-- الحقول اللي تظهر داخل الـ popup -->
+                    <field name="beneficiary_name" invisible="1"/>
+                    <field name="service_type_id" filters="1"/>
+                    <field name="id_card"/>
+                    <field name="user_id" invisible="1" filters="1" avatar_field="image"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Search View -->
+        <!-- ========================= -->
+        <record id="view_appointment_request_dashboard_search" model="ir.ui.view">
+            <field name="name">thoo8.appointment.request.dashboard.search</field>
+            <field name="model">thoo8.appointment.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Appointments">
+                    <field name="name"/>
+                    <field name="beneficiary_name"/>
+                    <field name="id_card"/>
+                    <field name="mobile"/>
+                    <field name="user_id"/>
+                    <field name="department"/>
+                    <separator/>
+                    <filter string="Draft" name="st_draft" domain="[('state','=','draft')]"/>
+                    <filter string="Confirmed" name="st_confirmed" domain="[('state','=','confirmed')]"/>
+                    <filter string="Completed" name="st_completed" domain="[('state','=','completed')]"/>
+                    <filter string="Cancelled" name="st_cancelled" domain="[('state','=','cancelled')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Department" name="grp_department" context="{'group_by':'department'}"/>
+                        <filter string="Assigned To" name="grp_user" context="{'group_by':'user_id'}"/>
+                        <filter string="Status" name="grp_state" context="{'group_by':'state'}"/>
+                        <filter string="Date" name="grp_date" context="{'group_by':'appointment_date'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="department" icon="fa-users" select="1"/>
+                        <field name="state" icon="fa-flag" select="1"/>
+                        <field name="service_type_id" icon="fa-cogs" select="1"/>
+                        <field name="user_id" icon="fa-user" select="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Action and Menu -->
+        <!-- ========================= -->
+        <record id="action_appointment_request_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">thoo8.appointment.request</field>
+            <field name="view_mode">calendar,kanban,graph,gantt,activity,tree</field>
+            <field name="search_view_id" ref="view_appointment_request_dashboard_search"/>
+        </record>
+
+        <menuitem id="menu_appointment_dashboard"
+                  name="Dashboard"
+                  parent="menu_thoo8_root"
+                  action="action_appointment_request_dashboard"
+                  sequence="1"/>
+    </data>
+</odoo>
