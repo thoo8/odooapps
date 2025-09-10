@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_thoo8_sms_provider" model="ir.actions.act_window">
+        <field name="name">SMS Providers</field>
+        <field name="res_model">thoo8.sms.provider</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_sms_provider_tree" model="ir.ui.view">
+        <field name="name">thoo8.sms.provider.tree</field>
+        <field name="model">thoo8.sms.provider</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Providers">
+                <field name="name"/>
+                <field name="api_url"/>
+                <field name="recipient_number_field"/>
+                <field name="message_field"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sms_provider_form" model="ir.ui.view">
+        <field name="name">thoo8.sms.provider.form</field>
+        <field name="model">thoo8.sms.provider</field>
+        <field name="arch" type="xml">
+            <form string="SMS Provider">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Test SMS Form Open -->
+                        <button class="oe_stat_button"
+                                name="action_open_test_wizard"
+                                icon="fa-paper-plane"
+                                string="Test SMS"
+                                type="object"/>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="api_url"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="recipient_number_field"/>
+                            <field name="message_field"/>
+                        </group>
+                        <group>
+                            <field name="success_code"/>
+                            <field name="success_code_var"/>
+                        </group>
+                    </group>
+
+                    <separator string="Provider Fields"/>
+                    <group>
+                        <field name="provider_fields">
+                            <tree editable="bottom">
+                                <field name="field_name"/>
+                                <field name="api_key_name"/>
+                                <field name="value"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <separator string="Extra Parameters (JSON)"/>
+                    <group>
+                        <field name="extra_params" placeholder='{"customKey": "value"}'/>
+                        <!--<div class="text-muted">
+                            Add any additional dynamic variables required by the provider in JSON format.
+                        </div>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

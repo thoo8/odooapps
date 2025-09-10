@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Existing SMS Root Menu under Technical -->
+    <menuitem id="menu_thoo8_sms_root"
+              name="SMS Gateway (THOO8)"
+              parent="base.menu_custom"
+              sequence="50"/>
+
+    <!-- Providers -->
+    <menuitem id="menu_thoo8_sms_provider"
+              name="Providers"
+              parent="menu_thoo8_sms_root"
+              action="action_thoo8_sms_provider"/>
+
+    <!-- Templates -->
+    <menuitem id="menu_thoo8_sms_template"
+              name="Templates"
+              parent="menu_thoo8_sms_root"
+              action="action_thoo8_sms_template"/>
+
+    <!-- Logs (Technical Section) -->
+    <menuitem id="menu_thoo8_sms_log"
+              name="Logs"
+              parent="menu_thoo8_sms_root"
+              action="action_thoo8_sms_log"/>
+</odoo>

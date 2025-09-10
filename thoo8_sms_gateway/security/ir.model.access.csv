@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_thoo8_sms_provider_user,access.thoo8.sms.provider.user,model_thoo8_sms_provider,base.group_user,1,0,0,0
+access_thoo8_sms_provider_manager,access.thoo8.sms.provider.manager,model_thoo8_sms_provider,base.group_system,1,1,1,1
+
+access_thoo8_sms_provider_field_user,access.thoo8.sms.provider.field.user,model_thoo8_sms_provider_field,base.group_user,1,0,0,0
+access_thoo8_sms_provider_field_manager,access.thoo8.sms.provider.field.manager,model_thoo8_sms_provider_field,base.group_system,1,1,1,1
+
+access_thoo8_sms_template_user,access.thoo8.sms.template.user,model_thoo8_sms_template,base.group_user,1,0,0,0
+access_thoo8_sms_template_manager,access.thoo8.sms.template.manager,model_thoo8_sms_template,base.group_system,1,1,1,1
+
+access_thoo8_sms_log_user,access.thoo8.sms.log.user,model_thoo8_sms_log,base.group_user,1,1,1,0
+access_thoo8_sms_log_manager,access.thoo8.sms.log.manager,model_thoo8_sms_log,base.group_system,1,1,1,1
+
+access_thoo8_sms_template_field_wizard_manager,access.thoo8.sms.template.field.wizard.manager,model_thoo8_sms_template_field_wizard,base.group_system,1,1,1,1
+access_thoo8_sms_test_wizard,access_thoo8_sms_test_wizard,model_thoo8_sms_test_wizard,base.group_system,1,1,1,1

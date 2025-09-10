@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thoo8 SMS Gateway | بوابة الرسائل النصية</title>
+    <meta name="description" content="Thoo8 SMS Gateway Module for Odoo 15">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static/description/icon.png" type="image/png">
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+        header { background:#004080; color:#fff; padding:20px 40px; text-align:center; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color:#004080; }
+        ul { list-style: none; padding-left:0; }
+        li { margin: 10px 0; }
+        .feature { display: flex; align-items: center; }
+        .feature img { width:32px; height:32px; margin-right:10px; }
+        .language-switch { position: fixed; top:20px; right:20px; padding:10px 15px; background:#004080; color:#fff; border:none; cursor:pointer; border-radius:5px; }
+        .short-version { background:#e6f2ff; padding:10px; border-radius:5px; margin:15px 0; }
+    </style>
+    <script>
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang;
+            if(lang==='ar'){
+                document.body.style.direction = 'rtl';
+            } else {
+                document.body.style.direction = 'ltr';
+            }
+            document.querySelectorAll('[data-lang]').forEach(function(el){
+                el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+            });
+        }
+        window.onload = function() {
+            switchLanguage('en'); // اللغة الافتراضية
+        };
+    </script>
+</head>
+<body>
+    <button class="language-switch" onclick="switchLanguage(document.documentElement.lang==='en'?'ar':'en')">
+        <span data-lang="en">العربية</span>
+        <span data-lang="ar">English</span>
+    </button>
+    <header>
+        <h1 data-lang="en">Thoo8 SMS Gateway</h1>
+        <h1 data-lang="ar">بوابة الرسائل النصية Thoo8</h1>
+    </header>
+    <div class="container">
+        <section>
+            <h2 data-lang="en">Module Summary</h2>
+            <h2 data-lang="ar">ملخص المودول</h2>
+            <p data-lang="en">Thoo8 SMS Gateway allows sending SMS messages through multiple providers with dynamic fields, templates, and logging for Odoo 15.</p>
+            <p data-lang="ar">بوابة الرسائل النصية Thoo8 تتيح إرسال الرسائل النصية عبر مزودين متعددين مع دعم الحقول الديناميكية، القوالب، وتسجيل الرسائل في سجل النظام في أودو 15.</p>
+        </section>
+
+        <section>
+            <h2 data-lang="en">Features</h2>
+            <h2 data-lang="ar">الميزات</h2>
+            <ul>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Manage multiple SMS providers with dynamic API fields.</span> <span data-lang="ar">إدارة مزودي الرسائل المتعددين مع حقول API ديناميكية.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Set default SMS provider and configure auto-send options.</span> <span data-lang="ar">تعيين المزود الافتراضي للرسائل وضبط خيارات الإرسال التلقائي.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Send SMS using JSON payload with extra parameters.</span> <span data-lang="ar">إرسال الرسائل النصية باستخدام JSON مع دعم المتغيرات الإضافية.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Success code verification to ensure delivery.</span> <span data-lang="ar">التحقق من كود النجاح لضمان التسليم.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Log all SMS messages with status, code, and response.</span> <span data-lang="ar">تسجيل جميع الرسائل النصية مع الحالة والكود والرد.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">SMS templates with Jinja2 for dynamic content.</span> <span data-lang="ar">قوالب رسائل نصية باستخدام Jinja2 لمحتوى ديناميكي.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Insert fields directly from linked models into templates.</span> <span data-lang="ar">إدراج حقول مباشرة من الموديلات المرتبطة في القوالب.</span></li>
+                <li class="feature"><img src="static/description/icon.png" alt="icon"> <span data-lang="en">Test SMS sending with response and delivery status.</span> <span data-lang="ar">إرسال رسالة اختبارية مع عرض الرد وحالة التسليم.</span></li>
+            </ul>
+        </section>
+
+        <section class="short-version">
+            <h3 data-lang="en">Quick Overview</h3>
+            <h3 data-lang="ar">نظرة سريعة</h3>
+            <ul>
+                <li data-lang="en">Multi-provider SMS sending</li>
+                <li data-lang="ar">إرسال الرسائل عبر مزودين متعددين</li>
+                <li data-lang="en">Template-based messages</li>
+                <li data-lang="ar">رسائل تعتمد على القوالب</li>
+                <li data-lang="en">Automatic logging and success verification</li>
+                <li data-lang="ar">تسجيل تلقائي والتحقق من النجاح</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 data-lang="en">Icons & Screenshots</h2>
+            <h2 data-lang="ar">الأيقونات ولقطات الشاشة</h2>
+            <img src="static/description/icon.png" alt="Module Icon" style="width:100px; margin:10px;">
+            <p data-lang="en">Example of SMS log view and template editor screenshots available in the module.</p>
+            <p data-lang="ar">مثال على عرض سجل الرسائل وواجهة محرر القوالب متوفرة داخل المودول.</p>
+        </section>
+    </div>
+</body>
+</html>

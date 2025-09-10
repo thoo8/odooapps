@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action for Settings -->
+    <record id="action_thoo8_sms_settings" model="ir.actions.act_window">
+        <field name="name">SMS Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+
+    <!-- Inherit General Settings -->
+    <record id="view_res_config_settings_sms" model="ir.ui.view">
+        <field name="name">res.config.settings.sms</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="SMS Settings" data-key="thoo8_sms_gateway" string="SMS (Thoo8) Settings">
+                    <h2>SMS Gateway Settings</h2>
+
+                    <!-- Auto Send Option -->
+                    <div class="row mt16 o_settings_container" id="sms_management_general">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="sms_auto_send"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="sms_auto_send">
+                                <label for="sms_auto_send"/>
+                                <div class="text-muted">
+                                    If enabled, the system will automatically send SMS messages on specific events.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Default Provider -->
+                        <div class="col-12 col-lg-6 o_setting_box" id="sms_default_provider">
+                            <div class="o_setting_left_pane"></div>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_default_provider_id"/>
+                                <field name="sms_default_provider_id"/>
+                                <div class="text-muted">
+                                    Select the default SMS provider to be used unless another provider is specified.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fallback Message -->
+                    <div class="row mt2 o_settings_container" id="sms_management_fallback">
+                        <div class="col-12 o_setting_box">
+                            <div class="o_setting_left_pane"></div>
+                            <div class="o_setting_right_pane" id="sms_fallback">
+                                <label for="sms_fallback_message"/>
+                                <field name="sms_fallback_message"/>
+                                <div class="text-muted">
+                                    Optional: Default fallback message if sending fails. Leave empty to ignore.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

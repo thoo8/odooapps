@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- View للويزرد -->
+    <record id="view_sms_test_wizard_form" model="ir.ui.view">
+        <field name="name">sms.test.wizard.form</field>
+        <field name="model">thoo8.sms.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string="SMS Test Wizard">
+                <group>
+                    <div class="alert alert-warning" colspan="2">
+                        <i class="fa fa-exclamation-triangle"/>
+                        إرسال الرسائل التجريبية يعتمد على وجود سجل واحد فقط لنفس الموديول المرتبط بالقالب.
+                        إذا كان هناك أكثر من سجل فقد لا يعمل الاختبار بشكل صحيح.
+                    </div>
+                </group>
+                <group>
+                    <field name="provider_id" attrs="{'readonly': [('provider_id','!=', False)]}"/>
+                    <field name="template_id"/>
+                    <field name="template_model" attrs="{'invisible': [('template_model','=', False)]}" readonly="1"/>
+                    <field name="test_number"/>
+                </group>
+                <footer>
+                    <button string="Send Test SMS"
+                            type="object"
+                            name="action_send_test_sms"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+        <record id="action_sms_test_wizard" model="ir.actions.act_window">
+            <field name="name">Test SMS</field>
+            <field name="res_model">thoo8.sms.test.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_thoo8_sms_log" model="ir.actions.act_window">
+        <field name="name">SMS Logs</field>
+        <field name="res_model">thoo8.sms.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_sms_log_tree" model="ir.ui.view">
+        <field name="name">thoo8.sms.log.tree</field>
+        <field name="model">thoo8.sms.log</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Logs" create="false" edit="false">
+                <field name="create_date"/>
+                <field name="provider_id"/>
+                <field name="to"/>
+                <field name="message"/>
+                <field name="code"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sms_log_form" model="ir.ui.view">
+        <field name="name">thoo8.sms.log.form</field>
+        <field name="model">thoo8.sms.log</field>
+        <field name="arch" type="xml">
+            <form string="SMS Log">
+                <sheet>
+                    <group>
+                        <field name="provider_id"/>
+                        <field name="to"/>
+                        <field name="message"/>
+                        <field name="status"/>
+                        <field name="code"/>
+                        <field name="response_text"/>
+                        <field name="create_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

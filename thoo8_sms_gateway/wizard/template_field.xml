@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_sms_template_field_wizard" model="ir.ui.view">
+        <field name="name">sms.template.field.wizard.form</field>
+        <field name="model">thoo8.sms.template.field.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Insert Variable">
+                <group>
+                    <field name="model_id" readonly="1"/>
+                    <field name="field_id"/>
+                </group>
+                <footer>
+                    <button string="Insert" type="object" name="action_insert_field" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sms_template_field_wizard" model="ir.actions.act_window">
+        <field name="name">Insert Variable</field>
+        <field name="res_model">thoo8.sms.template.field.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

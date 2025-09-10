@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <!-- قالب تجربة بالعربية -->
+    <record id="sms_template_test_ar" model="thoo8.sms.template">
+        <field name="name">Test SMS (Arabic)</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="lang"></field>
+        <field name="body"><![CDATA[مرحباً: {{ object.name }} هذه رسالة تجريبية من مزود الرسائل]]></field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- قالب تجربة بالإنجليزية -->
+    <record id="sms_template_test_en" model="thoo8.sms.template">
+        <field name="name">Test SMS (English)</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="lang">en_US</field>
+        <field name="body"><![CDATA[Welcom: {{ object.name }} This is a test SMS from provider]]></field>
+        <field name="active">True</field>
+    </record>
+</odoo>

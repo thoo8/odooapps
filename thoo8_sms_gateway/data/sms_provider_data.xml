@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <!-- Msegat -->
+    <record id="sms_provider_msegat" model="thoo8.sms.provider">
+        <field name="name">Msegat</field>
+        <field name="api_url">https://www.msegat.com/gw/sendsms.php</field>
+        <field name="active">True</field>
+        <field name="sucess_code">True</field>
+        <field name="recipient_number_field">numbers</field>
+        <field name="message_field">msg</field>
+        <field name="success_code">1,M0000</field>
+        <field name="success_code_var">code</field>
+        <field name="provider_fields" eval="[
+            (0, 0, {'field_name': 'username', 'api_key_name': 'userName', 'value': 'YOUR_USERNAME'}),
+            (0, 0, {'field_name': 'password', 'api_key_name': 'password', 'value': 'YOUR_PASSWORD'}),
+            (0, 0, {'field_name': 'sender_name', 'api_key_name': 'userSender', 'value': 'YOUR_SENDER'})
+        ]"/>
+        <field name="extra_params"></field>
+    </record>
+
+    <!-- Unifonic -->
+    <record id="sms_provider_unifonic" model="thoo8.sms.provider">
+        <field name="name">Unifonic</field>
+        <field name="api_url">https://api.unifonic.com/rest/Messages/Send</field>
+        <field name="active">True</field>
+        <field name="recipient_number_field">numbers</field>
+        <field name="message_field">msg</field>
+        <field name="success_code"></field>
+        <field name="success_code_var"></field>
+        <field name="provider_fields" eval="[
+            (0, 0, {'field_name': 'api_key', 'api_key_name': 'apiKey', 'value': 'YOUR_API_KEY'}),
+            (0, 0, {'field_name': 'sender_name', 'api_key_name': 'sender', 'value': 'YOUR_SENDER'})
+        ]"/>
+        <field name="extra_params"></field>
+    </record>
+
+    <!-- Twilio -->
+    <record id="sms_provider_twilio" model="thoo8.sms.provider">
+        <field name="name">Twilio</field>
+        <field name="api_url">https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json</field>
+        <field name="active">True</field>
+        <field name="recipient_number_field">numbers</field>
+        <field name="message_field">msg</field>
+        <field name="success_code">1</field>
+        <field name="success_code_var">code</field>
+        <field name="provider_fields" eval="[
+            (0, 0, {'field_name': 'account_sid', 'api_key_name': 'username', 'value': 'YOUR_ACCOUNT_SID'}),
+            (0, 0, {'field_name': 'auth_token', 'api_key_name': 'password', 'value': 'YOUR_AUTH_TOKEN'}),
+            (0, 0, {'field_name': 'from_number', 'api_key_name': 'From', 'value': '+1234567890'})
+        ]"/>
+        <field name="extra_params"></field>
+    </record>
+
+    <!-- Infobip -->
+    <record id="sms_provider_infobip" model="thoo8.sms.provider">
+        <field name="name">Infobip</field>
+        <field name="api_url">https://api.infobip.com/sms/1/text/single</field>
+        <field name="active">True</field>
+        <field name="recipient_number_field">numbers</field>
+        <field name="message_field">msg</field>
+        <field name="success_code">1</field>
+        <field name="success_code_var">code</field>
+        <field name="provider_fields" eval="[
+            (0, 0, {'field_name': 'api_key', 'api_key_name': 'apiKey', 'value': 'YOUR_API_KEY'}),
+            (0, 0, {'field_name': 'sender_name', 'api_key_name': 'from', 'value': 'YOUR_SENDER'})
+        ]"/>
+        <field name="extra_params"></field>
+    </record>
+
+    <!-- Nexmo (Vonage) -->
+    <record id="sms_provider_nexmo" model="thoo8.sms.provider">
+        <field name="name">Nexmo (Vonage)</field>
+        <field name="api_url">https://rest.nexmo.com/sms/json</field>
+        <field name="active">True</field>
+        <field name="recipient_number_field">numbers</field>
+        <field name="message_field">msg</field>
+        <field name="success_code">1</field>
+        <field name="success_code_var">code</field>
+        <field name="provider_fields" eval="[
+            (0, 0, {'field_name': 'api_key', 'api_key_name': 'apiKey', 'value': 'YOUR_API_KEY'}),
+            (0, 0, {'field_name': 'api_secret', 'api_key_name': 'apiSecret', 'value': 'YOUR_API_SECRET'}),
+            (0, 0, {'field_name': 'sender_name', 'api_key_name': 'from', 'value': 'YOUR_SENDER'})
+        ]"/>
+        <field name="extra_params"> </field>
+    </record>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_thoo8_sms_template" model="ir.actions.act_window">
+        <field name="name">SMS Templates</field>
+        <field name="res_model">thoo8.sms.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_sms_template_tree" model="ir.ui.view">
+        <field name="name">thoo8.sms.template.tree</field>
+        <field name="model">thoo8.sms.template</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Templates">
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="lang"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sms_template_form" model="ir.ui.view">
+        <field name="name">thoo8.sms.template.form</field>
+        <field name="model">thoo8.sms.template</field>
+        <field name="arch" type="xml">
+            <form string="SMS Template">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+
+                        <!-- Test SMS Form Open -->
+                        <button name="%(action_sms_test_wizard)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-paper-plane"
+                                string="Test SMS"
+                                context="{'default_provider_id': active_id}"/>
+
+                        <!-- Add Variable to Body text box -->
+                        <button name="%(action_sms_template_field_wizard)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-code"
+                                string="Insert Variable"
+                                context="{'default_model_id': model_id}"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Calendar Reminder" required="1"/></h1>
+                        <group>
+                            <field name="model_id" placeholder="e.g. Contact" required="1" options="{'no_create': True}"/>
+                            <field name="lang" groups="base.group_no_one" placeholder="e.g. en_US or {{ object.partner_id.lang }}"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </div>
+                    <notebook>
+                        <page string="Content" name="content">
+                            <group>
+                                <field name="body" nolabel="1" widget="sms_widget" placeholder="Write your SMS template here..."/>
+                                <!--<field name="body" widget="sms_widget" nolabel="1"/>-->
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
