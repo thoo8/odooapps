@@ -35,8 +35,7 @@
                                 type="action"
                                 class="oe_stat_button"
                                 icon="fa-paper-plane"
-                                string="Test SMS"
-                                context="{'default_provider_id': active_id}"/>
+                                string="Test SMS"/>
 
                         <!-- Add Variable to Body text box -->
                         <button name="%(action_sms_template_field_wizard)d"
