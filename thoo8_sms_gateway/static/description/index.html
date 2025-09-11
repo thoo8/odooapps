@@ -3,8 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body style="font-family: 'Tajawal', sans-serif;font-weight: 400;font-style: normal;">
         <div class="container oe_styling_v8">
 
             <section class="oe_container">
@@ -22,7 +25,7 @@
 
 
             <section class="oe_spaced mw-100 card m-1" style="margin-top:20px; margin-bottom:20px">
-                <div class="card-header shadow-sm p-0" style="font-family:'Open Sans', sans-serif; font-weight:600; font-size:18px; line-height:28px; color:#333333">
+                <div class="card-header shadow-sm p-0" style="font-weight:600; font-size:18px; line-height:28px; color:#333333">
                     <ul class="nav nav-tabs justify-content-center pt-1" role="tablist" style="background-color:#EBF3F5">
                         <!-- زر النسخة الإنجليزية -->
                         <li class="nav-item border border-bottom-0 border-dark mr-2"
@@ -66,7 +69,6 @@
                                 <h2>Icons & Screenshots</h2>
                                 <div class="">
                                     <h3>Module Icon</h3>
-                                    <img src="icon.png" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                     <img src="sms_gateway_001.jpg" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                     <img src="sms_gateway_002.jpg" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                 </div>
@@ -109,24 +111,24 @@
                     </div>
 
                     <!-- المحتوى العربي -->
-                    <div class="tab-pane fade active show" id="arabic" role="tabpanel">
-                        <section class="p-4" style="direction: rtl; text-align: right;font-family: Tahoma;">
+                    <div class="tab-pane fade active show o_rtl" id="arabic" role="tabpanel" style="direction: rtl;">
+                        <section class="p-4" style="direction: rtl; text-align: right;">
                             <h2>ملخص المودول</h2>
                             <p>يوفر هذا المودول واجهة متكاملة لإرسال الرسائل النصية (SMS) في Odoo، مع خيارات متعددة للتحكم بالمزودين، القوالب، التجربة، والسجلات.</p>
 
                             <h2>الميزات الرئيسية</h2>
                             <ul style="direction: rtl;">
-                                <li class="feature"><strong>تم ترجمته بالكامل للغة العربية 001_ar</strong></li>
-                                <li class="feature"><strong>إدارة مزودي الرسائل:</strong> إمكانية إضافة مزودين متعددين مع تحديد <span class="code">API URL</span> والمتغيرات الخاصة بكل مزود.</li>
-                                <li class="feature"><strong>حقول ديناميكية لكل مزود:</strong> دعم إضافة حقول مخصصة مثل مفاتيح API والمتغيرات المطلوبة بواسطة المزود.</li>
-                                <li class="feature"><strong>المزود الافتراضي:</strong> يمكن تحديد مزود افتراضي لإرسال الرسائل عبر الإعدادات (<span class="code">ResConfigSettings</span>).</li>
-                                <li class="feature"><strong>إرسال الرسائل النصية:</strong> إرسال رسائل SMS مع دعم JSON payload ديناميكي وإضافة أي متغيرات إضافية من <span class="code">extra_params</span>.</li>
-                                <li class="feature"><strong>التحقق من النجاح:</strong> التحقق من كود النجاح <span class="code">success_code_var</span> مقابل قائمة الأكواد المسموح بها <span class="code">success_code</span>.</li>
-                                <li class="feature"><strong>سجل الرسائل:</strong> تسجيل جميع الرسائل المرسلة مع حالة الإرسال، رقم المستلم، نص الرسالة، وكود الاستجابة.</li>
-                                <li class="feature"><strong>قوالب الرسائل:</strong> دعم قوالب SMS باستخدام Jinja2، مع إمكانية استخدام المتغيرات <span class="code">{{ object.field_name }}</span>.</li>
-                                <li class="feature"><strong>معاينة وإرسال تجريبي:</strong> إرسال رسالة اختبارية إلى رقم محدد باستخدام قالب محدد ومزود محدد، مع عرض رد المزود وتحديد النجاح أو الفشل.</li>
-                                <li class="feature"><strong>إدراج حقول القوالب:</strong> يمكن للمستخدم اختيار الحقول من الموديل المرتبط بالقالب وإدراجها مباشرة في نص الرسالة.</li>
-                                <li class="feature"><strong>إدارة الإعدادات العامة:</strong> من خلال <span class="code">ResConfigSettings</span> يمكن التحكم في:</li>
+                                <li class="feature" style="direction: rtl;"><strong>تم ترجمته بالكامل للغة العربية 001_ar</strong></li>
+                                <li class="feature" style="direction: rtl;"><strong>إدارة مزودي الرسائل:</strong> إمكانية إضافة مزودين متعددين مع تحديد <span class="code">API URL</span> والمتغيرات الخاصة بكل مزود.</li>
+                                <li class="feature" style="direction: rtl;"><strong>حقول ديناميكية لكل مزود:</strong> دعم إضافة حقول مخصصة مثل مفاتيح API والمتغيرات المطلوبة بواسطة المزود.</li>
+                                <li class="feature" style="direction: rtl;"><strong>المزود الافتراضي:</strong> يمكن تحديد مزود افتراضي لإرسال الرسائل عبر الإعدادات (<span class="code">ResConfigSettings</span>).</li>
+                                <li class="feature" style="direction: rtl;"><strong>إرسال الرسائل النصية:</strong> إرسال رسائل SMS مع دعم JSON payload ديناميكي وإضافة أي متغيرات إضافية من <span class="code">extra_params</span>.</li>
+                                <li class="feature" style="direction: rtl;"><strong>التحقق من النجاح:</strong> التحقق من كود النجاح <span class="code">success_code_var</span> مقابل قائمة الأكواد المسموح بها <span class="code">success_code</span>.</li>
+                                <li class="feature" style="direction: rtl;"><strong>سجل الرسائل:</strong> تسجيل جميع الرسائل المرسلة مع حالة الإرسال، رقم المستلم، نص الرسالة، وكود الاستجابة.</li>
+                                <li class="feature" style="direction: rtl;"><strong>قوالب الرسائل:</strong> دعم قوالب SMS باستخدام Jinja2، مع إمكانية استخدام المتغيرات <span class="code">{{ object.field_name }}</span>.</li>
+                                <li class="feature" style="direction: rtl;"><strong>معاينة وإرسال تجريبي:</strong> إرسال رسالة اختبارية إلى رقم محدد باستخدام قالب محدد ومزود محدد، مع عرض رد المزود وتحديد النجاح أو الفشل.</li>
+                                <li class="feature" style="direction: rtl;"><strong>إدراج حقول القوالب:</strong> يمكن للمستخدم اختيار الحقول من الموديل المرتبط بالقالب وإدراجها مباشرة في نص الرسالة.</li>
+                                <li class="feature" style="direction: rtl;"><strong>إدارة الإعدادات العامة:</strong> من خلال <span class="code">ResConfigSettings</span> يمكن التحكم في:</li>
                                 <ul>
                                     <li>تحديد المزود الافتراضي (<span class="code">sms_default_provider_id</span>)</li>
                                     <li>تمكين الإرسال التلقائي (<span class="code">sms_auto_send</span>)</li>
@@ -138,7 +140,6 @@
                                 <h2>الأيقونات ولقطات الشاشة</h2>
                                 <div class="">
                                     <h3>عرض الموديول</h3>
-                                    <img src="icon.png" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                     <img src="sms_gateway_001.jpg" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                     <img src="sms_gateway_002.jpg" style="margin:8px auto; width:90%; border-radius:10px 10px">
                                 </div>
@@ -173,10 +174,10 @@
                             </div>
 
                             <h2>المتطلبات</h2>
-                            <ul>
-                                <li>Odoo 15</li>
-                                <li>الوصول إلى الإنترنت لإرسال الرسائل عبر مزودي SMS</li>
-                                <li>صلاحيات للوصول إلى إعدادات النظام لإدارة المزودين والقوالب</li>
+                            <ul style="direction: rtl;">
+                                <li style="direction: rtl;">Odoo 15</li>
+                                <li style="direction: rtl;">الوصول إلى الإنترنت لإرسال الرسائل عبر مزودي SMS</li>
+                                <li style="direction: rtl;">صلاحيات للوصول إلى إعدادات النظام لإدارة المزودين والقوالب</li>
                             </ul>
                         </section>
                     </div>
