@@ -1,262 +1,178 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thoo8 SMS Gateway | بوابة الرسائل القصيرة</title>
-    <style>
-        body {
-            margin: 5;
-            padding: 0;
-            line-height: 1.6;
-            color: #333;
-        }
+<div class="container">
 
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            position: relative; /* عشان نقدر نستخدم position absolute للغة */
-        }
-
-        header img {
-            width: 100px;
-            height: auto;
-            display: block;
-            margin: 0 auto 10px;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        h2 {
-            color: #4CAF50;
-            margin-top: 30px;
-        }
-
-        ul {
-            padding-left: 20px;
-            list-style-type: disc;
-        }
-
-        .feature {
-            margin-bottom: 12px;
-        }
-
-        .code {
-            background-color: #f4f4f4;
-            padding: 2px 5px;
-            font-family: monospace;
-            border-radius: 3px;
-        }
-
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-
-        .lang-switch button {
-            margin-left: 5px;
-            padding: 6px 12px;
-            border: none;
-            background-color: white;
-            color: #4CAF50;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .lang-switch button:hover {
-            background-color: #f1f1f1;
-        }
-
-        .lang-switch button.active {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .short-version {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-left: 4px solid #4CAF50;
-            margin: 15px 0;
-        }
-
-    </style>
-</head>
-<body>
-    <header>
-        <img src="icon.png" alt="Thoo8 SMS Gateway Logo">
-        <h1>Thoo8 SMS Gateway</h1>
-        <p>حل شامل لإرسال الرسائل النصية عبر مزودي خدمات متعددين مع دعم القوالب والمزود الافتراضي.</p>
-        <div class="lang-switch">
-            <button id="arabicBtn" class="active">العربية</button>
-            <button id="englishBtn">English</button>
+    <section class="oe_container">
+        <div class="oe_row oe_spaced">
+            <h2 class="oe_slogan" style="color:#875A7B;">Thoo8 SMS Gateway - بوابات الرسائل النصية</h2>
+            <h3 class="oe_slogan">This module provides a complete interface for sending SMS messages</h3>
+            <h3 class="oe_slogan">حل شامل لإرسال الرسائل النصية عبر مزودي خدمات متعددين</h3>
         </div>
-    </header>
-    <main>
-        <!-- النسخة العربية -->
-        <div id="arabicContent" style="direction: rtl;">
-            <h2>ملخص المودول</h2>
-            <p>يوفر هذا المودول واجهة متكاملة لإرسال الرسائل النصية (SMS) في Odoo، مع خيارات متعددة للتحكم بالمزودين، القوالب، التجربة، والسجلات.</p>
+    </section>
 
-            <h2>الميزات الرئيسية</h2>
-            <ul>
-                <li class="feature"><strong>تم ترجمته بالكامل للغة العربية 001_ar</strong></li>
-                <li class="feature"><strong>إدارة مزودي الرسائل:</strong> إمكانية إضافة مزودين متعددين مع تحديد <span class="code">API URL</span> والمتغيرات الخاصة بكل مزود.</li>
-                <li class="feature"><strong>حقول ديناميكية لكل مزود:</strong> دعم إضافة حقول مخصصة مثل مفاتيح API والمتغيرات المطلوبة بواسطة المزود.</li>
-                <li class="feature"><strong>المزود الافتراضي:</strong> يمكن تحديد مزود افتراضي لإرسال الرسائل عبر الإعدادات (<span class="code">ResConfigSettings</span>).</li>
-                <li class="feature"><strong>إرسال الرسائل النصية:</strong> إرسال رسائل SMS مع دعم JSON payload ديناميكي وإضافة أي متغيرات إضافية من <span class="code">extra_params</span>.</li>
-                <li class="feature"><strong>التحقق من النجاح:</strong> التحقق من كود النجاح <span class="code">success_code_var</span> مقابل قائمة الأكواد المسموح بها <span class="code">success_code</span>.</li>
-                <li class="feature"><strong>سجل الرسائل:</strong> تسجيل جميع الرسائل المرسلة مع حالة الإرسال، رقم المستلم، نص الرسالة، وكود الاستجابة.</li>
-                <li class="feature"><strong>قوالب الرسائل:</strong> دعم قوالب SMS باستخدام Jinja2، مع إمكانية استخدام المتغيرات <span class="code">{{ object.field_name }}</span>.</li>
-                <li class="feature"><strong>معاينة وإرسال تجريبي:</strong> إرسال رسالة اختبارية إلى رقم محدد باستخدام قالب محدد ومزود محدد، مع عرض رد المزود وتحديد النجاح أو الفشل.</li>
-                <li class="feature"><strong>إدراج حقول القوالب:</strong> يمكن للمستخدم اختيار الحقول من الموديل المرتبط بالقالب وإدراجها مباشرة في نص الرسالة.</li>
-                <li class="feature"><strong>إدارة الإعدادات العامة:</strong> من خلال <span class="code">ResConfigSettings</span> يمكن التحكم في:</li>
-                <ul>
-                    <li>تحديد المزود الافتراضي (<span class="code">sms_default_provider_id</span>)</li>
-                    <li>تمكين الإرسال التلقائي (<span class="code">sms_auto_send</span>)</li>
-                    <li>رسالة افتراضية عند فشل الإرسال (<span class="code">sms_fallback_message</span>)</li>
-                </ul>
-            </ul>
+    <section class="oe_container oe_dark">
+        <div class="oe_row oe_spaced">
+        </div>
+    </section>
 
-            <h2>الأيقونات ولقطات الشاشة</h2>
-            <div style="display:flex; flex-wrap:wrap; gap:20px;">
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>عرض الموديول</p>
-                    <img src="icon.png" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_001.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_002.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>مزودي الخدمات</p>
-                    <img src="sms_gateway_003.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_004.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>محرر القوالب</p>
-                    <img src="sms_gateway_006.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_007.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_008.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>الرسائل التجريبية لضمان الربط</p>
-                    <img src="sms_gateway_005.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_009.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_012.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_013.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>هرض سجل الرسائل</p>
-                    <img src="sms_gateway_010.jpg" alt="SMS Log Screenshot" style="width:100%;">
-                    <img src="sms_gateway_011.jpg" alt="SMS Log Screenshot" style="width:100%;">
-                </div>
-            </div>
 
-            <h2>الملخص</h2>
-            <div class="short-version">
-                Thoo8 SMS Gateway يسمح بإرسال الرسائل النصية بسهولة، إدارة مزودين متعددين، دعم القوالب الديناميكية، سجل الرسائل، والتحقق من نجاح الإرسال.
-            </div>
-
-            <h2>المتطلبات</h2>
-            <ul>
-                <li>Odoo 15</li>
-                <li>الوصول إلى الإنترنت لإرسال الرسائل عبر مزودي SMS</li>
-                <li>صلاحيات للوصول إلى إعدادات النظام لإدارة المزودين والقوالب</li>
+    <section class="oe_spaced mw-100 card m-1" style="margin-top:20px; margin-bottom:20px">
+        <div class="card-header shadow-sm p-0" style="font-family:'Open Sans', sans-serif; font-weight:600; font-size:18px; line-height:28px; color:#333333">
+            <ul class="nav nav-tabs justify-content-center pt-1" role="tablist" style="background-color:#EBF3F5">
+                <!-- زر النسخة الإنجليزية -->
+                <li class="nav-item border border-bottom-0 border-dark mr-2"
+                    style="background-color:#EBF3F5; color:#333333; border-radius:5px 5px 0px 0px" role="presentation">
+                    <span href="#english" class="nav-link active" role="tab" aria-selected="true" data-bs-toggle="tab">
+                        English
+                    </span>
+                </li>
+                <!-- زر النسخة العربية -->
+                <li class="nav-item mr-1 border border-bottom-0 border-dark"
+                    style="background-color:#EBF3F5; color:#333333; border-radius:5px 5px 0px 0px" role="presentation">
+                    <span href="#arabic" class="nav-link" role="tab" aria-selected="false" data-bs-toggle="tab" tabindex="-1">
+                        العربية
+                    </span>
+                </li>
             </ul>
         </div>
 
-        <!-- النسخة الإنجليزية -->
-        <div id="englishContent" style="display:none;">
-            <h2>Module Summary</h2>
-            <p>This module provides a complete interface for sending SMS messages in Odoo, with multiple options for managing providers, templates, testing, and logs.</p>
+        <div class="card-body tab-content p-0" style="font-weight:400">
+            <!-- المحتوى الإنجليزي -->
+            <div class="tab-pane fade active show" id="english" role="tabpanel">
+                <section class="p-4">
+                    <h2>Module Summary</h2>
+                    <p>This module provides a complete interface for sending SMS messages in Odoo, with multiple options for managing providers, templates, testing, and logs.</p>
 
-            <h2>Main Features</h2>
-            <ul>
-                <li class="feature"><strong>SMS Providers Management:</strong> Add multiple providers with API URL and custom fields for each provider.</li>
-                <li class="feature"><strong>Dynamic Fields per Provider:</strong> Support for adding custom API keys and provider-specific variables.</li>
-                <li class="feature"><strong>Default Provider:</strong> Set a default provider via <span class="code">ResConfigSettings</span> for SMS sending.</li>
-                <li class="feature"><strong>SMS Sending:</strong> Send SMS messages with dynamic JSON payload and additional <span class="code">extra_params</span>.</li>
-                <li class="feature"><strong>Success Verification:</strong> Verify success codes using <span class="code">success_code_var</span> against allowed <span class="code">success_code</span> list.</li>
-                <li class="feature"><strong>SMS Logs:</strong> Log all messages with status, recipient number, message content, and response code.</li>
-                <li class="feature"><strong>Message Templates:</strong> Jinja2-based templates with dynamic fields like <span class="code">{{ object.field_name }}</span>.</li>
-                <li class="feature"><strong>Test & Preview:</strong> Send test messages to a chosen number using selected template and provider.</li>
-                <li class="feature"><strong>Insert Template Fields:</strong> Insert fields from the related model directly into the template.</li>
-                <li class="feature"><strong>Global Settings:</strong> Configure default provider (<span class="code">sms_default_provider_id</span>), auto-send (<span class="code">sms_auto_send</span>), and fallback message (<span class="code">sms_fallback_message</span>).</li>
-            </ul>
+                    <h2>Main Features</h2>
+                    <ul>
+                        <li class="feature"><strong>SMS Providers Management:</strong> Add multiple providers with API URL and custom fields for each provider.</li>
+                        <li class="feature"><strong>Dynamic Fields per Provider:</strong> Support for adding custom API keys and provider-specific variables.</li>
+                        <li class="feature"><strong>Default Provider:</strong> Set a default provider via <span class="code">ResConfigSettings</span> for SMS sending.</li>
+                        <li class="feature"><strong>SMS Sending:</strong> Send SMS messages with dynamic JSON payload and additional <span class="code">extra_params</span>.</li>
+                        <li class="feature"><strong>Success Verification:</strong> Verify success codes using <span class="code">success_code_var</span> against allowed <span class="code">success_code</span> list.</li>
+                        <li class="feature"><strong>SMS Logs:</strong> Log all messages with status, recipient number, message content, and response code.</li>
+                        <li class="feature"><strong>Message Templates:</strong> Jinja2-based templates with dynamic fields like <span class="code">{{ object.field_name }}</span>.</li>
+                        <li class="feature"><strong>Test & Preview:</strong> Send test messages to a chosen number using selected template and provider.</li>
+                        <li class="feature"><strong>Insert Template Fields:</strong> Insert fields from the related model directly into the template.</li>
+                        <li class="feature"><strong>Global Settings:</strong> Configure default provider (<span class="code">sms_default_provider_id</span>), auto-send (<span class="code">sms_auto_send</span>), and fallback message (<span class="code">sms_fallback_message</span>).</li>
+                    </ul>
 
-            <h2>Icons & Screenshots</h2>
-            <div style="display:flex; flex-wrap:wrap; gap:20px;">
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>Module Icon</p>
-                    <img src="icon.png" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_001.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_002.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>Providers</p>
-                    <img src="sms_gateway_003.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_004.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>Template Editor</p>
-                    <img src="sms_gateway_006.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_007.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_008.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>Test Send</p>
-                    <img src="sms_gateway_005.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_009.jpg" alt="Module Icon" style="width:100px;">
-                    <img src="sms_gateway_012.jpg" alt="Module Icon" style="width:100px;">
-                </div>
-                <div style="flex:1; min-width:200px; text-align:center;">
-                    <p>SMS Log View</p>
-                    <img src="sms_gateway_010.jpg" alt="SMS Log Screenshot" style="width:100%;">
-                    <img src="sms_gateway_011.jpg" alt="SMS Log Screenshot" style="width:100%;">
-                </div>
+                    <div class="row align-items-center shadow bg-white mt-5">
+                        <h2>Icons & Screenshots</h2>
+                        <div class="panel-body p-3 oe_demo oe_picture oe_screenshot">
+                            <p>Module Icon</p>
+                            <img src="icon.png" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_001.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_002.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>Providers</p>
+                            <img src="sms_gateway_003.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_004.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>Template Editor</p>
+                            <img src="sms_gateway_006.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_007.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_008.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>Test Send</p>
+                            <img src="sms_gateway_005.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_009.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_012.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>SMS Log View</p>
+                            <img src="sms_gateway_010.jpg" alt="SMS Log Screenshot" style="width:100%;">
+                            <img src="sms_gateway_011.jpg" alt="SMS Log Screenshot" style="width:100%;">
+                        </div>
+                    </div>
+
+                    <h2>Notes...</h2>
+                    <div class="short-version">
+                        Thoo8 SMS Gateway allows easy SMS sending, managing multiple providers, dynamic templates, message logging, and success verification.
+                    </div>
+
+                    <h2>Requirements</h2>
+                    <ul>
+                        <li>Odoo 15</li>
+                        <li>Internet access to send SMS via providers</li>
+                        <li>Permissions to access system settings to manage providers and templates</li>
+                    </ul>
+                </section>
             </div>
 
-            <h2>Notes...</h2>
-            <div class="short-version">
-                Thoo8 SMS Gateway allows easy SMS sending, managing multiple providers, dynamic templates, message logging, and success verification.
-            </div>
+            <!-- المحتوى العربي -->
+            <div class="tab-pane fade" id="arabic" role="tabpanel">
+                <section class="p-4" style="direction: rtl; text-align: right;">
+                    <h2>ملخص المودول</h2>
+                    <p>يوفر هذا المودول واجهة متكاملة لإرسال الرسائل النصية (SMS) في Odoo، مع خيارات متعددة للتحكم بالمزودين، القوالب، التجربة، والسجلات.</p>
 
-            <h2>Requirements</h2>
-            <ul>
-                <li>Odoo 15</li>
-                <li>Internet access to send SMS via providers</li>
-                <li>Permissions to access system settings to manage providers and templates</li>
-            </ul>
+                    <h2>الميزات الرئيسية</h2>
+                    <ul>
+                        <li class="feature"><strong>تم ترجمته بالكامل للغة العربية 001_ar</strong></li>
+                        <li class="feature"><strong>إدارة مزودي الرسائل:</strong> إمكانية إضافة مزودين متعددين مع تحديد <span class="code">API URL</span> والمتغيرات الخاصة بكل مزود.</li>
+                        <li class="feature"><strong>حقول ديناميكية لكل مزود:</strong> دعم إضافة حقول مخصصة مثل مفاتيح API والمتغيرات المطلوبة بواسطة المزود.</li>
+                        <li class="feature"><strong>المزود الافتراضي:</strong> يمكن تحديد مزود افتراضي لإرسال الرسائل عبر الإعدادات (<span class="code">ResConfigSettings</span>).</li>
+                        <li class="feature"><strong>إرسال الرسائل النصية:</strong> إرسال رسائل SMS مع دعم JSON payload ديناميكي وإضافة أي متغيرات إضافية من <span class="code">extra_params</span>.</li>
+                        <li class="feature"><strong>التحقق من النجاح:</strong> التحقق من كود النجاح <span class="code">success_code_var</span> مقابل قائمة الأكواد المسموح بها <span class="code">success_code</span>.</li>
+                        <li class="feature"><strong>سجل الرسائل:</strong> تسجيل جميع الرسائل المرسلة مع حالة الإرسال، رقم المستلم، نص الرسالة، وكود الاستجابة.</li>
+                        <li class="feature"><strong>قوالب الرسائل:</strong> دعم قوالب SMS باستخدام Jinja2، مع إمكانية استخدام المتغيرات <span class="code">{{ object.field_name }}</span>.</li>
+                        <li class="feature"><strong>معاينة وإرسال تجريبي:</strong> إرسال رسالة اختبارية إلى رقم محدد باستخدام قالب محدد ومزود محدد، مع عرض رد المزود وتحديد النجاح أو الفشل.</li>
+                        <li class="feature"><strong>إدراج حقول القوالب:</strong> يمكن للمستخدم اختيار الحقول من الموديل المرتبط بالقالب وإدراجها مباشرة في نص الرسالة.</li>
+                        <li class="feature"><strong>إدارة الإعدادات العامة:</strong> من خلال <span class="code">ResConfigSettings</span> يمكن التحكم في:</li>
+                        <ul>
+                            <li>تحديد المزود الافتراضي (<span class="code">sms_default_provider_id</span>)</li>
+                            <li>تمكين الإرسال التلقائي (<span class="code">sms_auto_send</span>)</li>
+                            <li>رسالة افتراضية عند فشل الإرسال (<span class="code">sms_fallback_message</span>)</li>
+                        </ul>
+                    </ul>
+
+                    <div class="row align-items-center shadow bg-white mt-5">
+                        <h2>الأيقونات ولقطات الشاشة</h2>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>عرض الموديول</p>
+                            <img src="icon.png" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_001.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_002.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>مزودي الخدمات</p>
+                            <img src="sms_gateway_003.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_004.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>محرر القوالب</p>
+                            <img src="sms_gateway_006.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_007.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_008.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>الرسائل التجريبية لضمان الربط</p>
+                            <img src="sms_gateway_005.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_009.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_012.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                            <img src="sms_gateway_013.jpg" alt="Module Icon" style="width:100%; border-radius:10px 10px">
+                        </div>
+                        <div class="oe_demo oe_picture oe_screenshot">
+                            <p>هرض سجل الرسائل</p>
+                            <img src="sms_gateway_010.jpg" alt="SMS Log Screenshot" style="width:100%;">
+                            <img src="sms_gateway_011.jpg" alt="SMS Log Screenshot" style="width:100%;">
+                        </div>
+                    </div>
+
+                    <h2>الملخص</h2>
+                    <div class="short-version">
+                        Thoo8 SMS Gateway يسمح بإرسال الرسائل النصية بسهولة، إدارة مزودين متعددين، دعم القوالب الديناميكية، سجل الرسائل، والتحقق من نجاح الإرسال.
+                    </div>
+
+                    <h2>المتطلبات</h2>
+                    <ul>
+                        <li>Odoo 15</li>
+                        <li>الوصول إلى الإنترنت لإرسال الرسائل عبر مزودي SMS</li>
+                        <li>صلاحيات للوصول إلى إعدادات النظام لإدارة المزودين والقوالب</li>
+                    </ul>
+                </section>
+            </div>
         </div>
-    </main>
-
-    <script>
-        const arabicBtn = document.getElementById('arabicBtn');
-        const englishBtn = document.getElementById('englishBtn');
-        const arabicContent = document.getElementById('arabicContent');
-        const englishContent = document.getElementById('englishContent');
-
-        arabicBtn.addEventListener('click', () => {
-            arabicContent.style.display = 'block';
-            englishContent.style.display = 'none';
-            arabicBtn.classList.add('active');
-            englishBtn.classList.remove('active');
-        });
-
-        englishBtn.addEventListener('click', () => {
-            arabicContent.style.display = 'none';
-            englishContent.style.display = 'block';
-            englishBtn.classList.add('active');
-            arabicBtn.classList.remove('active');
-        });
-    </script>
-</body>
-</html>
+    </section>
+</div>
