@@ -1,16 +1,74 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Thoo8 Appointment Booking',
-    'summary': "Custom Appointment Booking via Odoo Portal",
-    'description': "Allows users to request appointments through the portal with mobile OTP verification",
+    'summary': "Advanced Appointment Booking & Scheduling with Portal and SMS OTP Verification",
+    'description': """
+Thoo8 Appointment Booking Module
+================================
 
-    'category': 'thoo8',
-    'version': '1.0',
-    'author': "thoo8",
+A comprehensive and customizable appointment booking system integrated with portal, scheduling, and SMS gateway.
+
+Main Features:
+--------------
+✅ **Website Portal Booking**
+- Visitors can request appointments directly from the website portal.
+- Supports booking with or without predefined schedules.
+- Gender-based services (Male, Female, or Both).
+- Automatic filtering of available services and slots.
+- Prevents duplicate bookings for the same service and ID.
+
+✅ **Mobile & ID Verification**
+- OTP verification via SMS (integrated with `thoo8_sms_gateway`).
+- ID card format validation (Saudi national IDs supported).
+- Optional enabling/disabling of verifications via system settings.
+
+✅ **Scheduling & Slot Management**
+- Support for services with/without time slots.
+- Separate schedules for male and female departments.
+- Automatic slot reservation and release on booking, cancellation, or deletion.
+- Daily booking limits and system-wide suspension options.
+
+✅ **Admin Features**
+- Full appointment lifecycle: Draft → Confirmed → Completed → Cancelled.
+- Wizards for confirming, cancelling, and assigning appointments.
+- Assign appointments to responsible users with notifications.
+- Auto-create activities/tasks on confirmation.
+- Cancellation reasons with optional SMS notification.
+- Configurable SMS templates and rules.
+
+✅ **Notifications & SMS**
+- OTP verification via SMS for portal users.
+- Confirmation and cancellation SMS notifications.
+- SMS details logged in chatter for traceability.
+- Works with "Msegat" provider or any `thoo8_sms_gateway` provider.
+
+✅ **Security & Access Rights**
+- Separate security groups for appointment management.
+- Validation on ID card, mobile number, and duplicate prevention.
+- Token-based validation for portal success pages.
+
+✅ **Technical Highlights**
+- Custom controllers for booking flow: service selection, schedule fetching, OTP, duplicate check, submission, and success.
+- Dynamic domain filtering for available slots.
+- Activities (`mail.activity`) integrated for task tracking.
+- Fully integrated with `mail.thread` for communication.
+- Extendable architecture for services, slots, and SMS providers.
+
+""",
+    'version': '15.0.1.0.0',
+    'category': 'Extra Tools',
+    'author': "Saleh Ibrahim - thoo8",
+    'company': 'thoo8',
+    'maintainer': 'thoo8',
     'website': "http://www.thoo8.com",
-
-    # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'portal', 'website', 'mail', 'thoo8_sms_gateway'],
-
+    'depends': [
+        'base',
+        'web',
+        'portal',
+        'website',
+        'mail',
+        'thoo8_sms_gateway',
+    ],
     'data': [
         'security/appointment_security.xml',
         'security/appointment_rules.xml',
@@ -30,7 +88,10 @@
         'wizard/cancel_appointment.xml',
         'wizard/assign_appointment.xml',
     ],
-    'images': ['static/description/icon.png'],
+    'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+    ],
     'assets': {
         'web.assets_backend': [
             'thoo8_appointment/static/src/js/sms_vars_insert.js',
@@ -46,4 +107,3 @@
     'installable': True,
     'auto_install': False,
 }
-

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Booking Module</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Tajawal", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0;
+        }
+        .nav-tabs .nav-link {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .tab-content {
+            padding: 25px;
+        }
+        h5 {
+            margin-top: 25px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h5 i {
+            font-size: 20px;
+        }
+        .section-booking { background-color: #e9f5ff; }
+        .section-verification { background-color: #e8f9f1; }
+        .section-backend { background-color: #f9f2ff; }
+        .section-sms { background-color: #fff7e6; }
+        .section-config { background-color: #eef2f7; }
+        .section-extra { background-color: #f0f9ff; }
+
+        ul li {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        ul li::before {
+            content: "✔️ ";
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <section class="oe_spaced mw-100 card tajawal-regular">
+        <div class="card-header shadow-sm p-0" style="font-weight:600; font-size:18px; line-height:28px; color:#333333">
+            <ul class="nav nav-tabs justify-content-center pt-1" role="tablist" style="background-color:#EBF3F5">
+                <!-- English Tab -->
+                <li class="nav-item border border-bottom-0 border-dark me-2"
+                    style="background-color:#EBF3F5; color:#333333; border-radius:5px 5px 0px 0px" role="presentation">
+                    <button class="nav-link" id="english-tab" data-bs-toggle="tab" data-bs-target="#english" type="button" role="tab" aria-controls="english" aria-selected="true">
+                        English
+                    </button>
+                </li>
+                <!-- Arabic Tab -->
+                <li class="nav-item border border-bottom-0 border-dark"
+                    style="background-color:#EBF3F5; color:#333333; border-radius:5px 5px 0px 0px" role="presentation">
+                    <button class="nav-link active" id="arabic-tab" data-bs-toggle="tab" data-bs-target="#arabic" type="button" role="tab" aria-controls="arabic" aria-selected="false">
+                        العربية
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <!-- Arabic Content -->
+            <div class="tab-pane fade show active" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
+                <h3 class="mb-3 text-center">📌 المميزات والخصائص للموديول</h3>
+
+                <h5 class="section-booking"><i class="bi bi-calendar-check"></i> 1. الحجز من البوابة (Portal)</h5>
+                <ul>
+                    <li>واجهة مخصصة عبر موقع الويب لحجز المواعيد.</li>
+                    <li>اختيار الخدمة المطلوبة مع عرض الملاحظات الخاصة بها.</li>
+                    <li>إمكانية اختيار الموعد من جدول (يوم + وقت) أو إرسال طلب بدون تحديد.</li>
+                    <li>دعم تحديد الجنس (رجال / نساء / كلاهما).</li>
+                    <li>عرض المواعيد المتاحة فقط (غير المحجوزة).</li>
+                </ul>
+
+                <h5 class="section-verification"><i class="bi bi-shield-lock"></i> 2. التحقق والقيود</h5>
+                <ul>
+                    <li>التحقق برقم الجوال (OTP) عبر SMS.</li>
+                    <li>التحقق من رقم الهوية (10 أرقام، يبدأ بـ 1 أو 2).</li>
+                    <li>منع التكرار لنفس رقم الهوية والخدمة.</li>
+                    <li>التحقق من صحة رقم الجوال (يبدأ بـ 05 ويحتوي 10 أرقام).</li>
+                    <li>إيقاف الحجوزات بالكامل (Stop All).</li>
+                    <li>الحد اليومي للحجوزات مع منع الحجوزات عند الوصول للحد الأقصى.</li>
+                </ul>
+
+                <h5 class="section-backend"><i class="bi bi-speedometer2"></i> 3. إدارة المواعيد من لوحة الإدارة</h5>
+                <ul>
+                    <li>إنشاء/تعديل/إلغاء المواعيد يدويًا.</li>
+                    <li>جدولة المواعيد حسب الجنس (رجال/نساء).</li>
+                    <li>إدارة الأوقات (Slots) مع منع الحجز المزدوج.</li>
+                    <li>عرض تفاصيل الموعد: التاريخ، الوقت، الخدمة، المستفيد، الحالة.</li>
+                    <li>حالات الحجز: مسودة، مؤكدة، مكتملة، ملغية.</li>
+                </ul>
+
+                <h5 class="section-sms"><i class="bi bi-chat-dots"></i> 4. التكامل مع SMS</h5>
+                <ul>
+                    <li>إرسال إشعارات SMS عند: الإنشاء، التأكيد، الإلغاء.</li>
+                    <li>قوالب SMS قابلة للتخصيص.</li>
+                    <li>تكامل مع بوابة <strong>Msegat</strong> عبر <strong>thoo8_sms_gateway</strong>.</li>
+                </ul>
+
+                <h5 class="section-config"><i class="bi bi-gear"></i> 5. الإعدادات</h5>
+                <ul>
+                    <li>تفعيل/تعطيل التحقق بالهوية.</li>
+                    <li>تفعيل/تعطيل OTP للجوال.</li>
+                    <li>تحديد الحد اليومي للحجوزات.</li>
+                    <li>التحكم في تفعيل الحجوزات بالكامل.</li>
+                    <li>قوالب رسائل جاهزة للتخصيص.</li>
+                </ul>
+
+                <h5 class="section-extra"><i class="bi bi-stars"></i> 6. خصائص إضافية</h5>
+                <ul>
+                    <li>رقم مرجعي تلقائي لكل موعد.</li>
+                    <li>عرض تفاصيل الموعد بالعربية.</li>
+                    <li>تعيين موظف لمتابعة الطلب.</li>
+                    <li>إضافة رقم جوال إضافي.</li>
+                    <li>ملاحظات داخلية.</li>
+                    <li>توكن أمني (Security Token).</li>
+                    <li>واجهة Dashboard لمتابعة الحجوزات.</li>
+                </ul>
+            </div>
+
+            <!-- English Content -->
+            <div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
+                <h3 class="mb-3 text-center">📌 Module Features</h3>
+
+                <h5 class="section-booking"><i class="bi bi-calendar-check"></i> 1. Portal Booking</h5>
+                <ul>
+                    <li>Dedicated web portal for appointment booking.</li>
+                    <li>Service selection with dynamic notes display.</li>
+                    <li>Choose from schedule (day + time) or request without selection.</li>
+                    <li>Support for gender-based services (Male / Female / Both).</li>
+                    <li>Only available slots are shown.</li>
+                </ul>
+
+                <h5 class="section-verification"><i class="bi bi-shield-lock"></i> 2. Verification & Restrictions</h5>
+                <ul>
+                    <li>Mobile verification (OTP) via SMS.</li>
+                    <li>National ID verification (10 digits starting with 1 or 2).</li>
+                    <li>Duplicate prevention for same ID and service.</li>
+                    <li>Validates mobile format (starts with 05, 10 digits).</li>
+                    <li>Stop All: disable bookings globally.</li>
+                    <li>Daily booking limit with prevention after max is reached.</li>
+                </ul>
+
+                <h5 class="section-backend"><i class="bi bi-speedometer2"></i> 3. Backend Management</h5>
+                <ul>
+                    <li>Create, edit, or cancel appointments manually.</li>
+                    <li>Gender-based scheduling (Male / Female tables).</li>
+                    <li>Slot management with prevention of double booking.</li>
+                    <li>Appointment details: date, time, service, beneficiary, status.</li>
+                    <li>Status options: Draft, Confirmed, Completed, Canceled.</li>
+                </ul>
+
+                <h5 class="section-sms"><i class="bi bi-chat-dots"></i> 4. SMS Integration</h5>
+                <ul>
+                    <li>SMS notifications for: creation, confirmation, cancellation.</li>
+                    <li>Customizable SMS templates.</li>
+                    <li>Integration with <strong>Msegat</strong> via <strong>thoo8_sms_gateway</strong>.</li>
+                </ul>
+
+                <h5 class="section-config"><i class="bi bi-gear"></i> 5. Configuration</h5>
+                <ul>
+                    <li>Enable/Disable National ID check.</li>
+                    <li>Enable/Disable OTP verification.</li>
+                    <li>Set daily booking limits.</li>
+                    <li>Global control to stop bookings.</li>
+                    <li>Predefined customizable SMS templates.</li>
+                </ul>
+
+                <h5 class="section-extra"><i class="bi bi-stars"></i> 6. Extra Features</h5>
+                <ul>
+                    <li>Auto reference number via Sequence.</li>
+                    <li>Localized date & time in Arabic format.</li>
+                    <li>Assign staff (Assigned To) for follow-up.</li>
+                    <li>Support for an extra mobile number.</li>
+                    <li>Internal notes.</li>
+                    <li>Security Token validation.</li>
+                    <li>Dashboard for monitoring appointments.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
