@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Thoo8 Appointment Booking',
+    'name': 'Thoo8 Online Appointment Booking',
     'summary': "Advanced Appointment Booking & Scheduling with Portal and SMS OTP Verification",
     'description': """
 Thoo8 Appointment Booking Module
@@ -91,6 +91,27 @@ Main Features:
     'images': [
         'static/description/banner.png',
         'static/description/icon.png',
+        'static/screenshots/description/settings_01.jpg',
+        'static/screenshots/description/settings_02.jpg',
+        'static/screenshots/description/001.jpg',
+        'static/screenshots/description/002.jpg',
+        'static/screenshots/description/003.jpg',
+        'static/screenshots/description/004.jpg',
+        'static/screenshots/description/005.jpg',
+        'static/screenshots/description/006.jpg',
+        'static/screenshots/description/007.jpg',
+        'static/screenshots/description/008.jpg',
+        'static/screenshots/description/009.jpg',
+        'static/screenshots/description/010.jpg',
+        'static/screenshots/description/011.jpg',
+        'static/screenshots/description/012.jpg',
+        'static/screenshots/description/013.jpg',
+        'static/screenshots/description/014.jpg',
+        'static/screenshots/description/015.jpg',
+        'static/screenshots/description/017.jpg',
+        'static/screenshots/description/018.jpg',
+        'static/screenshots/description/019.jpg',
+        'static/screenshots/description/020.jpg',
     ],
     'assets': {
         'web.assets_backend': [
@@ -103,6 +124,7 @@ Main Features:
             'thoo8_appointment/static/src/css/portal_form.css',
         ]
     },
+    'license': 'LGPL-3',
     'application': True,
     'installable': True,
     'auto_install': False,

@@ -553,8 +553,8 @@ class ServiceType(models.Model):
     _sql_constraints = [
         ('unique_banae', 'unique(name)', 'the service name already exists.')]
 
-    name = fields.Char(string="Service Name", required=True, tracking=True)
-    note = fields.Html(string="Note About Appointment", tracking=True)
+    name = fields.Char(string="Service Name", required=True, tracking=True, translate=True)
+    note = fields.Html(string="Note About Appointment", tracking=True, translate=True)
     active = fields.Boolean(string='Active', default=True, tracking=True)
     service_gender = fields.Selection([
         ('male', "Men's Only"),

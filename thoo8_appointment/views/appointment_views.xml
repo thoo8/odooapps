@@ -309,6 +309,13 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="menu_patient_registration_form" model="website.menu">
+            <field name="name">Appointments</field>
+            <field name="url">/thoo8/appointment</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">65</field>
+        </record>
+
         <menuitem id="menu_thoo8_appointment_action"
                   name="All Appointments"
                   parent="menu_thoo8_appointments"

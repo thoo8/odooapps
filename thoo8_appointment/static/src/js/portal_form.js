@@ -203,7 +203,7 @@ odoo.define('thoo8_appointment.portal_form', function (require) {
 
             if (scheduleRequired) {
                 addItem(_t('التاريخ'), date || '-');
-                addItem(-t('الوقت'), timeText || '-');
+                addItem(_t('الوقت'), timeText || '-');
             }
 
             addItem(_t('المستفيد'), name);
@@ -778,7 +778,7 @@ odoo.define('thoo8_appointment.portal_form', function (require) {
 
                 if (self.mobileVerificationEnabled) {
                     if (!otpResult.valid) {
-                        this._showError('.error-otp-code', _t('رمز التحقق غير صحيح او منتهي الصلاحية.'));
+                        self._showError('.error-otp-code', _t('رمز التحقق غير صحيح او منتهي الصلاحية.'));
                         return;
                     }
                 }
